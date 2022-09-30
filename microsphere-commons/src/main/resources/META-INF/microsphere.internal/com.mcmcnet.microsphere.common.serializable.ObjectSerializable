@@ -1,0 +1,2 @@
+com.mcmcnet.microsphere.common.serializable.xml.XmlJacksonObjectSerializable
+com.mcmcnet.microsphere.common.serializable.json.JsonJacksonObjectSerializable

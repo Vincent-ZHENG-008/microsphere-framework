@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.apache</groupId>
+        <artifactId>apache</artifactId>
+        <version>25</version>
+    </parent>
+
+    <groupId>com.mcmcnet.microsphere</groupId>
+    <artifactId>microsphere-framework</artifactId>
+    <version>${revision}</version>
+    <packaging>pom</packaging>
+
+    <name>charging center</name>
+    <description>微服务基础设施层框架</description>
+
+    <modules>
+        <module>microsphere-commons</module>
+        <module>microsphere-core</module>
+        <module>microsphere-dependencies</module>
+        <module>microsphere-parent</module>
+        <module>microsphere-security</module>
+        <module>microsphere-statemachine</module>
+    </modules>
+
+    <properties>
+        <!-- project setting -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <revision>0.0.1-SNAPSHOT</revision>
+
+        <!-- maven compiler setting -->
+        <java.version>17</java.version>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <compiler-plugin.version>3.10.1</compiler-plugin.version>
+
+        <!-- plugins -->
+        <flatten.version>1.3.0</flatten.version>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>flatten-maven-plugin</artifactId>
+                <version>${flatten.version}</version>
+                <configuration>
+                    <updatePomFile>true</updatePomFile>
+                    <flattenMode>resolveCiFriendliesOnly</flattenMode>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>flatten</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>flatten</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>flatten.clean</id>
+                        <phase>clean</phase>
+                        <goals>
+                            <goal>clean</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
