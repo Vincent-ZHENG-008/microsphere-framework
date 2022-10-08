@@ -15,4 +15,6 @@ public interface Authentication extends Principal, Serializable {
 
     boolean isAuthenticated();
 
+    void setAuthenticated(boolean isAuthenticated);
+
 }

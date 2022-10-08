@@ -1,4 +1,4 @@
-package com.mcmcnet.microsphere.security.core.exception;
+package com.mcmcnet.microsphere.security.core.authentication.exception;
 
 import com.mcmcnet.microsphere.common.error.external.ExternalError;
 

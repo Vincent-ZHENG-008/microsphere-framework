@@ -10,14 +10,13 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>microsphere-security</artifactId>
+    <artifactId>microsphere-rest</artifactId>
     <version>${revision}</version>
     <packaging>pom</packaging>
 
     <modules>
-        <module>microsphere-security-core</module>
-        <module>microsphere-security-dependencies</module>
-        <module>microsphere-security-web</module>
+        <module>microsphere-rest-core</module>
+        <module>microsphere-rest-dependencies</module>
     </modules>
 
     <properties>

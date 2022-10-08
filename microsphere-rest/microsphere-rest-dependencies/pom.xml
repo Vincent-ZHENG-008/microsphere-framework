@@ -5,23 +5,30 @@
 
     <parent>
         <groupId>com.mcmcnet.microsphere</groupId>
-        <artifactId>microsphere-framework</artifactId>
+        <artifactId>microsphere-rest</artifactId>
         <version>${revision}</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>microsphere-security</artifactId>
+    <artifactId>microsphere-rest-dependencies</artifactId>
     <version>${revision}</version>
     <packaging>pom</packaging>
-
-    <modules>
-        <module>microsphere-security-core</module>
-        <module>microsphere-security-dependencies</module>
-        <module>microsphere-security-web</module>
-    </modules>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
+    <dependencyManagement>
+        <!-- MicroSphere Security Dependencies -->
+        <dependencies>
+            <dependency>
+                <groupId>com.mcmcnet.microsphere</groupId>
+                <artifactId>microsphere-dependencies</artifactId>
+                <version>${revision}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
 </project>

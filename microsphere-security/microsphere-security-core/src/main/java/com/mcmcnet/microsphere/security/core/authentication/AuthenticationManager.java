@@ -1,7 +1,7 @@
 package com.mcmcnet.microsphere.security.core.authentication;
 
 import com.mcmcnet.microsphere.security.core.Authentication;
-import com.mcmcnet.microsphere.security.core.exception.AuthenticationException;
+import com.mcmcnet.microsphere.security.core.authentication.exception.AuthenticationException;
 
 /**
  * todo...
