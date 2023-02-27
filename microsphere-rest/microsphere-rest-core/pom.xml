@@ -5,29 +5,37 @@
 
     <parent>
         <groupId>com.mcmcnet.microsphere</groupId>
-        <artifactId>microsphere-security</artifactId>
+        <artifactId>microsphere-rest</artifactId>
         <version>${revision}</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>microsphere-security-dependencies</artifactId>
+    <artifactId>microsphere-rest-core</artifactId>
     <version>${revision}</version>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <dependencies>
+        <!-- internal dependencies -->
+        <dependency>
+            <groupId>com.mcmcnet.microsphere</groupId>
+            <artifactId>microsphere-commons</artifactId>
+            <version>${revision}</version>
+        </dependency>
+
+        <!-- Slf4j logging -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+    </dependencies>
+
     <dependencyManagement>
         <!-- MicroSphere Security Dependencies -->
         <dependencies>
-            <dependency>
-                <groupId>com.mcmcnet.microsphere</groupId>
-                <artifactId>microsphere-dependencies</artifactId>
-                <version>${revision}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
             <dependency>
                 <groupId>com.mcmcnet.microsphere</groupId>
                 <artifactId>microsphere-rest-dependencies</artifactId>

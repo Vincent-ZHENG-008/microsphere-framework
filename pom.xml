@@ -22,6 +22,7 @@
         <module>microsphere-core</module>
         <module>microsphere-dependencies</module>
         <module>microsphere-parent</module>
+        <module>microsphere-rest</module>
         <module>microsphere-security</module>
         <module>microsphere-statemachine</module>
     </modules>
