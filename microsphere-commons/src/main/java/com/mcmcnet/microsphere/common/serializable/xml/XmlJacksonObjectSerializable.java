@@ -12,7 +12,7 @@ import com.mcmcnet.microsphere.common.serializable.SerializableException;
 import java.io.IOException;
 
 /**
- * @author zhengwenhuan@gdmcmc.cn
+ * @author wunhwantseng@gmail.com
  */
 public class XmlJacksonObjectSerializable implements ObjectSerializable {
 

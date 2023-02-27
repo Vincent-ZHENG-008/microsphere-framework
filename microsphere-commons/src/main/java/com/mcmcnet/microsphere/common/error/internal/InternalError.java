@@ -3,7 +3,7 @@ package com.mcmcnet.microsphere.common.error.internal;
 /**
  * todo...
  *
- * @author zhengwenhuan@gdmcmc.cn
+ * @author wunhwantseng@gmail.com
  * @since todo...
  **/
 public class InternalError extends RuntimeException {

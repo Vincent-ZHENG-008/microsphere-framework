@@ -3,7 +3,7 @@ package com.mcmcnet.microsphere.core.util;
 /**
  * todo...
  *
- * @author zhengwenhuan@gdmcmc.cn
+ * @author wunhwantseng@gmail.com
  * @since todo...
  **/
 public class Assert {

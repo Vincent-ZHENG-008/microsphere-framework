@@ -6,7 +6,7 @@ import com.mcmcnet.microsphere.security.core.exception.AuthenticationException;
 /**
  * todo...
  *
- * @author zhengwenhuan@gdmcmc.cn
+ * @author wunhwantseng@gmail.com
  * @since todo...
  **/
 public interface AuthenticationManager {

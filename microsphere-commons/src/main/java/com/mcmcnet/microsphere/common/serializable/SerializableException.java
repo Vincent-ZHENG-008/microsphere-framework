@@ -1,7 +1,7 @@
 package com.mcmcnet.microsphere.common.serializable;
 
 /**
- * @author zhengwenhuan@gdmcmc.cn
+ * @author wunhwantseng@gmail.com
  */
 public class SerializableException extends RuntimeException{
 

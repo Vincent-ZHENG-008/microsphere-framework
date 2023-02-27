@@ -3,7 +3,7 @@ package com.mcmcnet.microsphere.common.code.export;
 /**
  * todo...
  *
- * @author zhengwenhuan@gdmcmc.cn
+ * @author wunhwantseng@gmail.com
  * @since todo...
  **/
 public interface Code {

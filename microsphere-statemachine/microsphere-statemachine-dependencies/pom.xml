@@ -20,12 +20,20 @@
 
     <dependencyManagement>
         <dependencies>
+            <!-- Global Dependencies Management -->
             <dependency>
                 <groupId>com.mcmcnet.microsphere</groupId>
                 <artifactId>microsphere-dependencies</artifactId>
                 <version>${revision}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+
+            <!-- Microsphere Dependencies -->
+            <dependency>
+                <groupId>com.mcmcnet.microsphere</groupId>
+                <artifactId>microsphere-commons</artifactId>
+                <version>${revision}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

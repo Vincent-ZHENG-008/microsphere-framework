@@ -5,9 +5,9 @@
 
     <parent>
         <groupId>com.mcmcnet.microsphere</groupId>
-        <artifactId>microsphere-framework</artifactId>
+        <artifactId>microsphere-parent</artifactId>
         <version>${revision}</version>
-        <relativePath>../pom.xml</relativePath>
+        <relativePath>../microsphere-parent/pom.xml</relativePath>
     </parent>
 
     <artifactId>microsphere-statemachine</artifactId>

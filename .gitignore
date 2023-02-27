@@ -35,3 +35,10 @@ hs_err_pid*
 
 # Eclipse
 **/.eclipse
+
+# Jetbrains
+.idea
+.fleet
+
+# SystemOS
+.DS_Store

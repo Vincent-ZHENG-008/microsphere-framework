@@ -6,7 +6,7 @@ import java.security.Principal;
 /**
  * todo...
  *
- * @author zhengwenhuan@gdmcmc.cn
+ * @author wunhwantseng@gmail.com
  * @since todo...
  **/
 public interface Authentication extends Principal, Serializable {

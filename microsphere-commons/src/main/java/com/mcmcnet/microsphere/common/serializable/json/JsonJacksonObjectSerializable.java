@@ -20,7 +20,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * @author zhengwenhuan@gdmcmc.cn
+ * @author wunhwantseng@gmail.com
  */
 public final class JsonJacksonObjectSerializable implements ObjectSerializable {
 

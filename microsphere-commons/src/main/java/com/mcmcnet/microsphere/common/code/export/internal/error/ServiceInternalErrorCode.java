@@ -5,7 +5,7 @@ import com.mcmcnet.microsphere.common.code.export.Code;
 /**
  * todo...
  *
- * @author zhengwenhuan@gdmcmc.cn
+ * @author wunhwantseng@gmail.com
  * @since todo...
  **/
 public class ServiceInternalErrorCode implements Code {

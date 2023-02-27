@@ -3,7 +3,7 @@ package com.mcmcnet.microsphere.core.text;
 /**
  * todo...
  *
- * @author zhengwenhuan@gdmcmc.cn
+ * @author wunhwantseng@gmail.com
  * @since todo...
  **/
 public abstract class FormatUtil {

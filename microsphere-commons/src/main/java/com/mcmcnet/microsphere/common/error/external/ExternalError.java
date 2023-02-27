@@ -5,7 +5,7 @@ import java.net.http.HttpClient;
 /**
  * todo...
  *
- * @author zhengwenhuan@gdmcmc.cn
+ * @author wunhwantseng@gmail.com
  * @since todo...
  **/
 public class ExternalError extends RuntimeException {

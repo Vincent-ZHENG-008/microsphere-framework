@@ -1,15 +1,13 @@
 package com.mcmcnet.microsphere.common.serializable;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.mcmcnet.microsphere.common.serviceloader.SPI;
 
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
 /**
- * @author zhengwenhuan@gdmcmc.cn
+ * @author wunhwantseng@gmail.com
  */
-@SPI
 public interface ObjectSerializable {
 
     Charset CHARSET = StandardCharsets.UTF_8;

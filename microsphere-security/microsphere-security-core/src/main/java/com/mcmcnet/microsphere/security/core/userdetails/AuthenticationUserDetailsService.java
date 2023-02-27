@@ -6,7 +6,7 @@ import com.mcmcnet.microsphere.security.core.UserDetails;
 /**
  * todo...
  *
- * @author zhengwenhuan@gdmcmc.cn
+ * @author wunhwantseng@gmail.com
  * @since todo...
  **/
 public interface AuthenticationUserDetailsService<T extends Authentication> {

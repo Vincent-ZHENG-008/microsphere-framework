@@ -3,7 +3,7 @@ package com.mcmcnet.microsphere.common.container.context;
 /**
  * todo...
  *
- * @author zhengwenhuan@gdmcmc.cn
+ * @author wunhwantseng@gmail.com
  * @since todo...
  **/
 public interface Lifecycle {
