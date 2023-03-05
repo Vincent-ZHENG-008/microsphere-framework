@@ -10,7 +10,7 @@ import java.util.Objects;
  * @author wunhwantseng@gmail.com
  * @since 0.0.1
  */
-public class Parameters {
+public final class Parameters {
 
     public final Map<String, Object> storages;
 

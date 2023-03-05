@@ -12,8 +12,8 @@ public interface State<S, E> {
 
     boolean support(S current, E event);
 
-    void addStateListener(StateListener<S, E> listener);
+    void addListener(StateListener<S, E> listener);
 
-    void removeStateListener(StateListener<S, E> listener);
+    void removeListener(StateListener<S, E> listener);
 
 }

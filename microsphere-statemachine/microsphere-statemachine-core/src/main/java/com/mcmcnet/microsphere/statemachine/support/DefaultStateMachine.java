@@ -8,6 +8,7 @@ import com.mcmcnet.microsphere.statemachine.Transition;
 import com.mcmcnet.microsphere.statemachine.exception.GuardNonPassedException;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 import java.util.function.Function;
@@ -27,9 +28,9 @@ public class DefaultStateMachine<S, E> implements StateMachine<S, E> {
     private final Collection<Transition<S, E>> transitions;
 
     public DefaultStateMachine(E initialEvent, Collection<Transition<S, E>> transitions) {
-        this.transitions = transitions;
         this.id = UUID.randomUUID();
         this.initialEvent = initialEvent;
+        this.transitions = transitions;
     }
 
     @Override
@@ -43,9 +44,17 @@ public class DefaultStateMachine<S, E> implements StateMachine<S, E> {
     }
 
     @Override
-    public boolean fire(E event, Parameters parameter) {
-        S currentState = null; // todo: wait to init
-        Objects.nonNull(currentState);
+    public Collection<Transition<S, E>> getTransitions() {
+        return List.copyOf(this.transitions);
+    }
+
+    @Override
+    public boolean fire(E event, Parameters params) {
+        S currentState = null;
+        if (!Objects.equals(initialEvent, event)) {
+            // todo：wait to impl logic
+            currentState = null;
+        }
 
         Transition<S, E> trigger = null;
         for (Transition<S, E> transition : transitions) {

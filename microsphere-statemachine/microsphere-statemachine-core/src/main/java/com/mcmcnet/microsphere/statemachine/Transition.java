@@ -22,10 +22,14 @@ public interface Transition<S, E> {
 
     Function<StateContext<S, E>, Boolean> getGuard();
 
-    Collection<Consumer<StateContext<S,E>>> getActions();
+    Collection<Consumer<StateContext<S, E>>> getActions();
 
     void addActionListener(ActionListener<S, E> listener);
 
+    void addActionListener(Collection<ActionListener<S, E>> listeners);
+
     void removeActionListener(ActionListener<S, E> listener);
+
+    void publishEvent(StateMachine<S, E> machine, StateContext<S, E> ctx, long duration);
 
 }

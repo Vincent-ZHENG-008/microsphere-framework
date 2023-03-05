@@ -37,4 +37,11 @@ public class DefaultStateContext<S, E> implements StateContext<S, E> {
     public Exception getException() {
         return null;
     }
+
+    @Override
+    public String toString() {
+        return "DefaultStateContext{" +
+                "transition=" + transition +
+                '}';
+    }
 }

@@ -17,7 +17,9 @@ public interface StateMachine<S, E> {
 
     E getInitialEvent();
 
-    boolean fire(E event, Parameters parameter);
+    Collection<Transition<S, E>> getTransitions();
+
+    boolean fire(E event, Parameters params);
 
     static <S, E> StateMachine<S, E> of(E initialEvent, Collection<Transition<S, E>> transitions) {
         return new DefaultStateMachine<S, E>(initialEvent, transitions);

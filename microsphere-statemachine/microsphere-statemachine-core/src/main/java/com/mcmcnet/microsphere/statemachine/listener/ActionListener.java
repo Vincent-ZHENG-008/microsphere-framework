@@ -13,6 +13,6 @@ import java.util.function.Consumer;
  */
 public interface ActionListener<S, E> {
 
-    void onExecute(StateMachine<S, E> stateMachine, Consumer<StateContext<S, E>> action, long duration);
+    void onExecute(StateMachine<S, E> stateMachine, StateContext<S, E> ctx, long duration);
 
 }
