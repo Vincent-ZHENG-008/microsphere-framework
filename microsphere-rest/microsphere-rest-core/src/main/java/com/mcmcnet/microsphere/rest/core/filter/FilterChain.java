@@ -8,7 +8,7 @@ import java.io.IOException;
 /**
  * todo...
  *
- * @author zhengwenhuan@gdmcmc.cn
+ * @author wunhwantseng@gmail.com
  * @since todo...
  **/
 public interface FilterChain {

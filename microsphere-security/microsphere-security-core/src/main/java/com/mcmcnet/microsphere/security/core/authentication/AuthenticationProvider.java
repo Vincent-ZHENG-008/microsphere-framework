@@ -5,7 +5,7 @@ import com.mcmcnet.microsphere.security.core.Authentication;
 /**
  * todo...
  *
- * @author zhengwenhuan@gdmcmc.cn
+ * @author wunhwantseng@gmail.com
  * @since todo...
  **/
 public interface AuthenticationProvider {
