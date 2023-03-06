@@ -1,15 +1,18 @@
 package com.mcmcnet.microsphere.statemachine.support;
 
 
-import com.mcmcnet.microsphere.statemachine.Parameters;
-import com.mcmcnet.microsphere.statemachine.StateContext;
+import com.mcmcnet.microsphere.statemachine.Parameter;
 import com.mcmcnet.microsphere.statemachine.StateMachine;
-import com.mcmcnet.microsphere.statemachine.Transition;
 import com.mcmcnet.microsphere.statemachine.exception.GuardNonPassedException;
+import com.mcmcnet.microsphere.statemachine.state.DefaultStateContext;
+import com.mcmcnet.microsphere.statemachine.state.State;
+import com.mcmcnet.microsphere.statemachine.state.StateContext;
+import com.mcmcnet.microsphere.statemachine.transition.Transition;
+import com.mcmcnet.microsphere.statemachine.trigger.DefaultTriggerContext;
+import com.mcmcnet.microsphere.statemachine.trigger.TriggerContext;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Objects;
 import java.util.UUID;
 import java.util.function.Function;
 
@@ -23,13 +26,11 @@ public class DefaultStateMachine<S, E> implements StateMachine<S, E> {
 
     private final UUID id;
 
-    private final E initialEvent;
 
     private final Collection<Transition<S, E>> transitions;
 
-    public DefaultStateMachine(E initialEvent, Collection<Transition<S, E>> transitions) {
+    public DefaultStateMachine(Collection<Transition<S, E>> transitions) {
         this.id = UUID.randomUUID();
-        this.initialEvent = initialEvent;
         this.transitions = transitions;
     }
 
@@ -39,53 +40,53 @@ public class DefaultStateMachine<S, E> implements StateMachine<S, E> {
     }
 
     @Override
-    public E getInitialEvent() {
-        return initialEvent;
-    }
-
-    @Override
     public Collection<Transition<S, E>> getTransitions() {
         return List.copyOf(this.transitions);
     }
 
     @Override
-    public boolean fire(E event, Parameters params) {
-        S currentState = null;
-        if (!Objects.equals(initialEvent, event)) {
-            // todo：wait to impl logic
-            currentState = null;
-        }
+    public boolean fire(E event, Parameter param) {
+        final TriggerContext<S, E> triggerContext = new DefaultTriggerContext<>(event);
 
-        Transition<S, E> trigger = null;
         for (Transition<S, E> transition : transitions) {
-            if (transition.getSource().support(currentState, event)) {
+            if (transition.getTrigger().evaluate(triggerContext)) {
+                final DefaultStateContext<S, E> stateContext = new DefaultStateContext<>(this, transition, param);
+
                 final Function<StateContext<S, E>, Boolean> guard = transition.getGuard();
                 if (guard != null) {
-                    final DefaultStateContext<S, E> stateContext = new DefaultStateContext<>(transition);
                     if (!guard.apply(stateContext)) {
                         throw new GuardNonPassedException();
                     }
                 }
 
-                trigger = transition;
-                break;
+                final State<S, E> source = transition.getSource();
+                try {
+                    // State entry event published
+                    source.onEntry(stateContext);
+
+                    // Traversal all action
+                    transition.getActions().forEach(consumer -> consumer.accept(stateContext));
+
+                    // Action listener published
+                    transition.publishEvent(this, stateContext, -1);
+
+                    // State completed event published
+                    source.onComplete(stateContext);
+                } finally {
+                    // State exist event published
+                    source.onExist(stateContext);
+                }
+                return true;
             }
-        }
-
-        if (trigger != null) {
-            final DefaultStateContext<S, E> stateContext = new DefaultStateContext<>(trigger);
-            trigger.getActions().forEach(consumer -> consumer.accept(stateContext));
-
-            return true;
         }
         return false;
     }
+
 
     @Override
     public String toString() {
         return "DefaultStateMachine{" +
                 "id=" + id +
-                ", initialEvent=" + initialEvent +
                 ", transitions=" + transitions +
                 '}';
     }

@@ -1,9 +1,7 @@
 package com.mcmcnet.microsphere.statemachine.listener;
 
-import com.mcmcnet.microsphere.statemachine.StateContext;
+import com.mcmcnet.microsphere.statemachine.state.StateContext;
 import com.mcmcnet.microsphere.statemachine.StateMachine;
-
-import java.util.function.Consumer;
 
 /**
  * #: todo - what is this

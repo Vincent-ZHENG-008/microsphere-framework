@@ -26,6 +26,12 @@
             <version>${revision}</version>
         </dependency>
 
+        <!-- Slf4j -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+
         <!-- Jackson Serialization -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>

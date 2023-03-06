@@ -1,6 +1,6 @@
 package com.mcmcnet.microsphere.statemachine.listener;
 
-import com.mcmcnet.microsphere.statemachine.StateContext;
+import com.mcmcnet.microsphere.statemachine.state.StateContext;
 
 /**
  * #: todo - what is this

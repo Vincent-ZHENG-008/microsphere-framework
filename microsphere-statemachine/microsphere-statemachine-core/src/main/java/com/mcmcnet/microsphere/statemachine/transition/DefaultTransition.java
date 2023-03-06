@@ -1,10 +1,10 @@
-package com.mcmcnet.microsphere.statemachine.support;
+package com.mcmcnet.microsphere.statemachine.transition;
 
-import com.mcmcnet.microsphere.statemachine.State;
-import com.mcmcnet.microsphere.statemachine.StateContext;
+import com.mcmcnet.microsphere.statemachine.state.State;
+import com.mcmcnet.microsphere.statemachine.state.StateContext;
 import com.mcmcnet.microsphere.statemachine.StateMachine;
-import com.mcmcnet.microsphere.statemachine.Transition;
 import com.mcmcnet.microsphere.statemachine.listener.ActionListener;
+import com.mcmcnet.microsphere.statemachine.trigger.Trigger;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -19,10 +19,11 @@ import java.util.function.Function;
  */
 public class DefaultTransition<S, E> implements Transition<S, E> {
 
-
     private final State<S, E> source;
 
     private final State<S, E> target;
+
+    private final Trigger<S, E> trigger;
 
     private final Function<StateContext<S, E>, Boolean> guard;
 
@@ -30,9 +31,10 @@ public class DefaultTransition<S, E> implements Transition<S, E> {
 
     private final Collection<ActionListener<S, E>> listeners;
 
-    public DefaultTransition(State<S, E> source, State<S, E> target, Function<StateContext<S, E>, Boolean> guard, Collection<Consumer<StateContext<S, E>>> actions) {
+    public DefaultTransition(State<S, E> source, State<S, E> target, Trigger<S, E> trigger, Function<StateContext<S, E>, Boolean> guard, Collection<Consumer<StateContext<S, E>>> actions) {
         this.source = source;
         this.target = target;
+        this.trigger = trigger;
         this.guard = guard;
         this.actions = actions;
         this.listeners = new ArrayList<>(0);
@@ -51,6 +53,11 @@ public class DefaultTransition<S, E> implements Transition<S, E> {
     @Override
     public State<S, E> getTarget() {
         return target;
+    }
+
+    @Override
+    public Trigger<S, E> getTrigger() {
+        return trigger;
     }
 
     @Override
@@ -90,6 +97,7 @@ public class DefaultTransition<S, E> implements Transition<S, E> {
         return "DefaultTransition{" +
                 "source=" + source +
                 ", target=" + target +
+                ", trigger=" + trigger +
                 ", guard=" + guard +
                 ", actions=" + actions +
                 ", listeners=" + listeners +

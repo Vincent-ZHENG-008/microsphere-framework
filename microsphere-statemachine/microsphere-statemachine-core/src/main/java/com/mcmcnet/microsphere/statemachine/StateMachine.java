@@ -1,6 +1,7 @@
 package com.mcmcnet.microsphere.statemachine;
 
 import com.mcmcnet.microsphere.statemachine.support.DefaultStateMachine;
+import com.mcmcnet.microsphere.statemachine.transition.Transition;
 
 import java.util.Collection;
 import java.util.UUID;
@@ -15,14 +16,12 @@ public interface StateMachine<S, E> {
 
     UUID getId();
 
-    E getInitialEvent();
-
     Collection<Transition<S, E>> getTransitions();
 
-    boolean fire(E event, Parameters params);
+    boolean fire(E event, Parameter param);
 
-    static <S, E> StateMachine<S, E> of(E initialEvent, Collection<Transition<S, E>> transitions) {
-        return new DefaultStateMachine<S, E>(initialEvent, transitions);
+    static <S, E> StateMachine<S, E> of(Collection<Transition<S, E>> transitions) {
+        return new DefaultStateMachine<>(transitions);
     }
 
 }

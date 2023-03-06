@@ -1,8 +1,8 @@
-package com.mcmcnet.microsphere.statemachine.support;
+package com.mcmcnet.microsphere.statemachine.state;
 
-import com.mcmcnet.microsphere.statemachine.StateContext;
+import com.mcmcnet.microsphere.statemachine.Parameter;
 import com.mcmcnet.microsphere.statemachine.StateMachine;
-import com.mcmcnet.microsphere.statemachine.Transition;
+import com.mcmcnet.microsphere.statemachine.transition.Transition;
 
 /**
  * #: todo - what is this
@@ -12,15 +12,21 @@ import com.mcmcnet.microsphere.statemachine.Transition;
  */
 public class DefaultStateContext<S, E> implements StateContext<S, E> {
 
+    private final StateMachine<S, E> stateMachine;
+
     private final Transition<S, E> transition;
 
-    public DefaultStateContext(Transition<S, E> transition) {
+    private final Parameter parameter;
+
+    public DefaultStateContext(StateMachine<S, E> stateMachine, Transition<S, E> transition, Parameter parameter) {
+        this.stateMachine = stateMachine;
         this.transition = transition;
+        this.parameter = parameter;
     }
 
     @Override
     public E getEvent() {
-        return null;
+        return getTransition().getTrigger().getEvent();
     }
 
     @Override
@@ -30,7 +36,12 @@ public class DefaultStateContext<S, E> implements StateContext<S, E> {
 
     @Override
     public StateMachine<S, E> getStateMachine() {
-        return null;
+        return stateMachine;
+    }
+
+    @Override
+    public Parameter getParameter() {
+        return parameter;
     }
 
     @Override

@@ -1,6 +1,10 @@
-package com.mcmcnet.microsphere.statemachine;
+package com.mcmcnet.microsphere.statemachine.transition;
 
+import com.mcmcnet.microsphere.statemachine.state.State;
+import com.mcmcnet.microsphere.statemachine.state.StateContext;
+import com.mcmcnet.microsphere.statemachine.StateMachine;
 import com.mcmcnet.microsphere.statemachine.listener.ActionListener;
+import com.mcmcnet.microsphere.statemachine.trigger.Trigger;
 
 import java.util.Collection;
 import java.util.function.Consumer;
@@ -19,6 +23,8 @@ public interface Transition<S, E> {
     State<S, E> getSource();
 
     State<S, E> getTarget();
+
+    Trigger<S, E> getTrigger();
 
     Function<StateContext<S, E>, Boolean> getGuard();
 
