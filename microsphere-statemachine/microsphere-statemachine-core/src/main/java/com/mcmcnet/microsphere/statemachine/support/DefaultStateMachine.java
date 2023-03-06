@@ -24,8 +24,11 @@ import java.util.function.Function;
  */
 public class DefaultStateMachine<S, E> implements StateMachine<S, E> {
 
+    /**
+     * StateMachine ID
+     * Default used uuid generator
+     */
     private final UUID id;
-
 
     private final Collection<Transition<S, E>> transitions;
 
