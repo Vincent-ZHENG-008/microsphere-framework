@@ -6,7 +6,7 @@ import com.mcmcnet.microsphere.statemachine.state.DefalutState;
 import com.mcmcnet.microsphere.statemachine.state.State;
 import com.mcmcnet.microsphere.statemachine.transition.DefaultTransition;
 import com.mcmcnet.microsphere.statemachine.transition.Transition;
-import com.mcmcnet.microsphere.statemachine.trigger.EventTrigger;
+import com.mcmcnet.microsphere.statemachine.trigger.ObjectTrigger;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +16,7 @@ import java.util.List;
  * #: todo - what is this
  *
  * @author wunhwantseng@gmail.com
- * @since todo - since from which version
+ * @since 0.0.1
  */
 public class GuardStateMachineTest {
 
@@ -27,7 +27,7 @@ public class GuardStateMachineTest {
         final State<String, String> source = new DefalutState<>("init", null);
         final State<String, String> target = new DefalutState<>("created", null);
 
-        final Transition<String, String> transition = new DefaultTransition<>(source, target, new EventTrigger<>("init"), ctx -> false, List.of());
+        final Transition<String, String> transition = new DefaultTransition<>(source, target, new ObjectTrigger<>("init"), ctx -> false, List.of());
 
         try {
             final StateMachine<String, String> sm = StateMachine.of(List.of(transition));

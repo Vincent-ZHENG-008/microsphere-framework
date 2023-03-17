@@ -4,7 +4,9 @@ import com.mcmcnet.microsphere.statemachine.state.State;
 import com.mcmcnet.microsphere.statemachine.state.StateContext;
 import com.mcmcnet.microsphere.statemachine.StateMachine;
 import com.mcmcnet.microsphere.statemachine.listener.ActionListener;
+import com.mcmcnet.microsphere.statemachine.trigger.DefaultTriggerContext;
 import com.mcmcnet.microsphere.statemachine.trigger.Trigger;
+import com.mcmcnet.microsphere.statemachine.trigger.TriggerContext;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -15,7 +17,7 @@ import java.util.function.Function;
  * #: todo - what is this
  *
  * @author wunhwantseng@gmail.com
- * @since todo - since from which version
+ * @since 0.0.1
  */
 public class DefaultTransition<S, E> implements Transition<S, E> {
 
@@ -42,7 +44,9 @@ public class DefaultTransition<S, E> implements Transition<S, E> {
 
     @Override
     public boolean transit(StateContext<S, E> context) {
-        return false;
+        final TriggerContext<S, E> triggerContext = new DefaultTriggerContext<>(context.getEvent());
+
+        return this.trigger.evaluate(triggerContext);
     }
 
     @Override

@@ -8,6 +8,4 @@ package com.mcmcnet.microsphere.statemachine.listener;
  */
 public interface StateMachineListener<S, E> {
 
-
-
 }

@@ -1,5 +1,6 @@
 package com.mcmcnet.microsphere.statemachine;
 
+import com.mcmcnet.microsphere.statemachine.state.StateContext;
 import com.mcmcnet.microsphere.statemachine.support.DefaultStateMachine;
 import com.mcmcnet.microsphere.statemachine.transition.Transition;
 
@@ -18,7 +19,7 @@ public interface StateMachine<S, E> {
 
     Collection<Transition<S, E>> getTransitions();
 
-    boolean fire(E event, Parameter param);
+    StateContext<S, E> fire(E event, Parameter param);
 
     static <S, E> StateMachine<S, E> of(Collection<Transition<S, E>> transitions) {
         return new DefaultStateMachine<>(transitions);

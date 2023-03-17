@@ -4,13 +4,12 @@ import com.mcmcnet.microsphere.statemachine.listener.StateListener;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 /**
  * #: todo - what is this
  *
  * @author wunhwantseng@gmail.com
- * @since todo - since from which version
+ * @since 0.0.1
  */
 public class DefalutState<S, E> implements State<S, E> {
 
@@ -24,6 +23,16 @@ public class DefalutState<S, E> implements State<S, E> {
         this.state = state;
         this.event = event;
         this.listeners = new ArrayList<>(0);
+    }
+
+    @Override
+    public S getState() {
+        return this.state;
+    }
+
+    @Override
+    public E getEvent() {
+        return this.event;
     }
 
     @Override

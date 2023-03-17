@@ -1,14 +1,16 @@
 package com.mcmcnet.microsphere.statemachine.state;
 
+import com.mcmcnet.microsphere.core.util.ObjectUtils;
 import com.mcmcnet.microsphere.statemachine.Parameter;
 import com.mcmcnet.microsphere.statemachine.StateMachine;
+import com.mcmcnet.microsphere.statemachine.enumerate.FireResult;
 import com.mcmcnet.microsphere.statemachine.transition.Transition;
 
 /**
  * #: todo - what is this
  *
  * @author wunhwantseng@gmail.com
- * @since todo - since from which version
+ * @since 0.0.1
  */
 public class DefaultStateContext<S, E> implements StateContext<S, E> {
 
@@ -18,10 +20,15 @@ public class DefaultStateContext<S, E> implements StateContext<S, E> {
 
     private final Parameter parameter;
 
+    private Exception error;
+
+    private FireResult result;
+
     public DefaultStateContext(StateMachine<S, E> stateMachine, Transition<S, E> transition, Parameter parameter) {
         this.stateMachine = stateMachine;
         this.transition = transition;
         this.parameter = parameter;
+        this.error = null;
     }
 
     @Override
@@ -46,7 +53,20 @@ public class DefaultStateContext<S, E> implements StateContext<S, E> {
 
     @Override
     public Exception getException() {
-        return null;
+        return error;
+    }
+
+    @Override
+    public FireResult getResult() {
+        return ObjectUtils.replaceIfNull(this.result, () -> FireResult.Rejected);
+    }
+
+    public void abnormalRegistration(Exception ex) {
+        this.error = ex;
+    }
+
+    public void resultRegistration(FireResult rs) {
+        this.result = rs;
     }
 
     @Override

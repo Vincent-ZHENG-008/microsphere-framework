@@ -3,13 +3,12 @@ package com.mcmcnet.microsphere.statemachine.support;
 
 import com.mcmcnet.microsphere.statemachine.Parameter;
 import com.mcmcnet.microsphere.statemachine.StateMachine;
+import com.mcmcnet.microsphere.statemachine.enumerate.FireResult;
 import com.mcmcnet.microsphere.statemachine.exception.GuardNonPassedException;
 import com.mcmcnet.microsphere.statemachine.state.DefaultStateContext;
 import com.mcmcnet.microsphere.statemachine.state.State;
 import com.mcmcnet.microsphere.statemachine.state.StateContext;
 import com.mcmcnet.microsphere.statemachine.transition.Transition;
-import com.mcmcnet.microsphere.statemachine.trigger.DefaultTriggerContext;
-import com.mcmcnet.microsphere.statemachine.trigger.TriggerContext;
 
 import java.util.Collection;
 import java.util.List;
@@ -30,6 +29,9 @@ public class DefaultStateMachine<S, E> implements StateMachine<S, E> {
      */
     private final UUID id;
 
+    /**
+     * List of transition
+     */
     private final Collection<Transition<S, E>> transitions;
 
     public DefaultStateMachine(Collection<Transition<S, E>> transitions) {
@@ -48,17 +50,15 @@ public class DefaultStateMachine<S, E> implements StateMachine<S, E> {
     }
 
     @Override
-    public boolean fire(E event, Parameter param) {
-        final TriggerContext<S, E> triggerContext = new DefaultTriggerContext<>(event);
-
+    public StateContext<S, E> fire(E event, Parameter param) {
         for (Transition<S, E> transition : transitions) {
-            if (transition.getTrigger().evaluate(triggerContext)) {
-                final DefaultStateContext<S, E> stateContext = new DefaultStateContext<>(this, transition, param);
+            final DefaultStateContext<S, E> stateContext = new DefaultStateContext<>(this, transition, param);
 
+            if (transition.transit(stateContext)) {
                 final Function<StateContext<S, E>, Boolean> guard = transition.getGuard();
                 if (guard != null) {
                     if (!guard.apply(stateContext)) {
-                        throw new GuardNonPassedException();
+                        throw new GuardNonPassedException("Transition guard does not passed.");
                     }
                 }
 
@@ -75,14 +75,31 @@ public class DefaultStateMachine<S, E> implements StateMachine<S, E> {
 
                     // State completed event published
                     source.onComplete(stateContext);
+
+                    // Result stage upgrade
+                    stateContext.resultRegistration(FireResult.Accepted);
+                } catch (Exception ex) {
+                    // StateContext error registration
+                    stateContext.abnormalRegistration(ex);
+
+                    // Result stage upgrade
+                    stateContext.resultRegistration(FireResult.Abnormal);
                 } finally {
                     // State exist event published
                     source.onExist(stateContext);
                 }
-                return true;
+
+                // Return StateContext
+                return stateContext;
             }
         }
-        return false;
+
+        // Not found transition matcher, fallback return default result
+        final DefaultStateContext<S, E> fallback = new DefaultStateContext<>(this, null, param);
+        // Result stage upgrade
+        fallback.resultRegistration(FireResult.Rejected);
+        // Return StateContext
+        return fallback;
     }
 
 

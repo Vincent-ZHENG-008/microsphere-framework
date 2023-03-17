@@ -29,6 +29,7 @@ public class SessionRegistryImpl implements SessionRegistry {
     @Override
     public Optional<SessionInformation> getSessionInformation(String sessionId) {
         Assert.hasText(sessionId, "SessionId required must input");
+
         return Optional.ofNullable(this.sessionIds.get(sessionId));
     }
 

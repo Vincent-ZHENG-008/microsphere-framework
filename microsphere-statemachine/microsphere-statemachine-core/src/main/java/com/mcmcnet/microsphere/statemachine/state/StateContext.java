@@ -2,6 +2,7 @@ package com.mcmcnet.microsphere.statemachine.state;
 
 import com.mcmcnet.microsphere.statemachine.Parameter;
 import com.mcmcnet.microsphere.statemachine.StateMachine;
+import com.mcmcnet.microsphere.statemachine.enumerate.FireResult;
 import com.mcmcnet.microsphere.statemachine.transition.Transition;
 
 /**
@@ -21,5 +22,7 @@ public interface StateContext<S, E> {
     Parameter getParameter();
 
     Exception getException();
+
+    FireResult getResult();
 
 }

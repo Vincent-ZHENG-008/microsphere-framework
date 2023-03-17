@@ -2,6 +2,7 @@ package com.mcmcnet.microsphere.core.util;
 
 import java.util.Collection;
 import java.util.Objects;
+import java.util.function.Supplier;
 
 /**
  * todo...
@@ -24,15 +25,23 @@ public class Assert {
     }
 
     public static <T> T notNull(T source, String msg) {
+        return notNull(source, () -> msg);
+    }
+
+    public static <T> T notNull(T source, Supplier<String> msg) {
         if (isNull(source)) {
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException(msg.get());
         }
         return source;
     }
 
     public static String hasText(String text, String msg) {
+        return hasText(text, () -> msg);
+    }
+
+    public static String hasText(String text, Supplier<String> msg) {
         if (!hasText(text)) {
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException(msg.get());
         }
         return text;
     }

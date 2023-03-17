@@ -21,20 +21,12 @@ public interface Parameter {
         return new Parameters(new HashMap<>());
     }
 
+    static Parameter from(Map<String, Object> source) {
+        return new Parameters(Map.copyOf(source));
+    }
+
     Parameter put(String key, Object value);
 
-    <T> T loadCase(String key, Class<T> n);
-
-    default String loadString(String key) {
-        return loadCase(key, String.class);
-    }
-
-    default Integer loadInteger(String key) {
-        return loadCase(key, Integer.class);
-    }
-
-    default Long loadLong(String key) {
-        return loadCase(key, Long.class);
-    }
+    <T> T load(String key, Class<T> n);
 
 }

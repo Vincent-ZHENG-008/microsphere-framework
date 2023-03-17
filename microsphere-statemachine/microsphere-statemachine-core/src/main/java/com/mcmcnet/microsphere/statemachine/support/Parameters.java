@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
- * #: todo - what is this
+ * Parameters is local store of {@link  Parameter} implement.
  *
  * @author wunhwantseng@gmail.com
  * @since 0.0.1
@@ -29,7 +29,7 @@ public final class Parameters implements Parameter {
 
     @SuppressWarnings("unchecked")
     @Override
-    public <T> T loadCase(String key, Class<T> n) {
+    public <T> T load(String key, Class<T> n) {
         final Object goods = storages.get(key);
         if (Assert.isNull(goods)) {
             return null;
