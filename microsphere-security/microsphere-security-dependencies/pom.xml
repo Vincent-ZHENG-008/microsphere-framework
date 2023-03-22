@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.mcmcnet.microsphere</groupId>
+        <groupId>com.microsphere</groupId>
         <artifactId>microsphere-security</artifactId>
         <version>${revision}</version>
         <relativePath>../pom.xml</relativePath>
@@ -22,15 +22,8 @@
         <!-- MicroSphere Security Dependencies -->
         <dependencies>
             <dependency>
-                <groupId>com.mcmcnet.microsphere</groupId>
+                <groupId>com.microsphere</groupId>
                 <artifactId>microsphere-dependencies</artifactId>
-                <version>${revision}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>com.mcmcnet.microsphere</groupId>
-                <artifactId>microsphere-rest-dependencies</artifactId>
                 <version>${revision}</version>
                 <type>pom</type>
                 <scope>import</scope>

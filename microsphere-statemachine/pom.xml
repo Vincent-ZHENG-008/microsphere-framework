@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.mcmcnet.microsphere</groupId>
+        <groupId>com.microsphere</groupId>
         <artifactId>microsphere-parent</artifactId>
         <version>${revision}</version>
         <relativePath>../microsphere-parent/pom.xml</relativePath>

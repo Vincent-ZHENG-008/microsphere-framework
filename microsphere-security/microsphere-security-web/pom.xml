@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.mcmcnet.microsphere</groupId>
+        <groupId>com.microsphere</groupId>
         <artifactId>microsphere-security</artifactId>
         <version>${revision}</version>
         <relativePath>../pom.xml</relativePath>
@@ -21,20 +21,23 @@
     <dependencies>
         <!-- internal dependencies -->
         <dependency>
-            <groupId>com.mcmcnet.microsphere</groupId>
+            <groupId>com.microsphere</groupId>
             <artifactId>microsphere-commons</artifactId>
             <version>${revision}</version>
         </dependency>
         <dependency>
-            <groupId>com.mcmcnet.microsphere</groupId>
+            <groupId>com.microsphere</groupId>
             <artifactId>microsphere-security-core</artifactId>
             <version>${revision}</version>
         </dependency>
+
+        <!-- jakarta RestAPI -->
         <dependency>
-            <groupId>com.mcmcnet.microsphere</groupId>
-            <artifactId>microsphere-rest-core</artifactId>
-            <version>${revision}</version>
+            <groupId>jakarta.ws.rs</groupId>
+            <artifactId>jakarta.ws.rs-api</artifactId>
+            <version>3.1.0</version>
         </dependency>
+
 
         <!-- Slf4j logging -->
         <dependency>
@@ -47,7 +50,7 @@
         <!-- MicroSphere Security Dependencies -->
         <dependencies>
             <dependency>
-                <groupId>com.mcmcnet.microsphere</groupId>
+                <groupId>com.microsphere</groupId>
                 <artifactId>microsphere-security-dependencies</artifactId>
                 <version>${revision}</version>
                 <type>pom</type>

@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.mcmcnet.microsphere</groupId>
+        <groupId>com.microsphere</groupId>
         <artifactId>microsphere-statemachine</artifactId>
         <version>${revision}</version>
         <relativePath>../pom.xml</relativePath>
@@ -22,7 +22,7 @@
         <dependencies>
             <!-- Global Dependencies Management -->
             <dependency>
-                <groupId>com.mcmcnet.microsphere</groupId>
+                <groupId>com.microsphere</groupId>
                 <artifactId>microsphere-dependencies</artifactId>
                 <version>${revision}</version>
                 <type>pom</type>
@@ -31,7 +31,7 @@
 
             <!-- Microsphere Dependencies -->
             <dependency>
-                <groupId>com.mcmcnet.microsphere</groupId>
+                <groupId>com.microsphere</groupId>
                 <artifactId>microsphere-commons</artifactId>
                 <version>${revision}</version>
             </dependency>
