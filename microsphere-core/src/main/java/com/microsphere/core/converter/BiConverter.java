@@ -4,7 +4,7 @@ package com.microsphere.core.converter;
  * todo...
  *
  * @author wunhwantseng@gmail.com
- * @since todo...
+ * @since 0.0.1
  **/
 public interface BiConverter<T1, T2, R> {
 

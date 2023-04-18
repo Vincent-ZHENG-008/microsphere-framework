@@ -13,7 +13,7 @@ import java.util.concurrent.CopyOnWriteArraySet;
  * todo...
  *
  * @author wunhwantseng@gmail.com
- * @since todo...
+ * @since 0.0.1
  **/
 public class SessionRegistryImpl implements SessionRegistry {
 

@@ -6,7 +6,7 @@ import com.microsphere.common.error.external.ExternalError;
  * todo...
  *
  * @author wunhwantseng@gmail.com
- * @since todo...
+ * @since 0.0.1
  **/
 public class AuthenticationException extends ExternalError {
 

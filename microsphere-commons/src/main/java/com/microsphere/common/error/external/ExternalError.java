@@ -4,7 +4,7 @@ package com.microsphere.common.error.external;
  * todo...
  *
  * @author wunhwantseng@gmail.com
- * @since todo...
+ * @since 0.0.1
  **/
 public class ExternalError extends RuntimeException {
 

@@ -1,5 +1,7 @@
 package com.microsphere.statemachine;
 
+import com.microsphere.common.container.context.Lifecycle;
+import com.microsphere.common.value.ID;
 import com.microsphere.statemachine.state.StateContext;
 import com.microsphere.statemachine.support.DefaultStateMachine;
 import com.microsphere.statemachine.transition.Transition;
@@ -13,8 +15,11 @@ import java.util.UUID;
  * @author wunhwantseng@gmail.com
  * @since 0.0.1
  */
-public interface StateMachine<S, E> {
+public interface StateMachine<S, E> extends Lifecycle {
 
+    int RUNNING = 0;
+
+    int STOPPED = 1;
     UUID getId();
 
     Collection<Transition<S, E>> getTransitions();
@@ -23,6 +28,14 @@ public interface StateMachine<S, E> {
 
     static <S, E> StateMachine<S, E> of(Collection<Transition<S, E>> transitions) {
         return new DefaultStateMachine<>(transitions);
+    }
+
+    record MachineId(UUID uuid) implements ID<UUID> {
+
+        @Override
+        public UUID getId() {
+            return uuid;
+        }
     }
 
 }

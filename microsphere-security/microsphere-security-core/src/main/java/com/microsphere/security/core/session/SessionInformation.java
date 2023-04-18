@@ -6,7 +6,7 @@ import java.io.Serializable;
  * todo...
  *
  * @author wunhwantseng@gmail.com
- * @since todo...
+ * @since 0.0.1
  **/
 public class SessionInformation implements Serializable {
 

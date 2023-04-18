@@ -4,7 +4,7 @@ package com.microsphere.core.text;
  * todo...
  *
  * @author wunhwantseng@gmail.com
- * @since todo...
+ * @since 0.0.1
  **/
 public abstract class FormatUtil {
 

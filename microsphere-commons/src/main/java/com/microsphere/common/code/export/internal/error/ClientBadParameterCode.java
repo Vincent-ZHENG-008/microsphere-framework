@@ -3,10 +3,10 @@ package com.microsphere.common.code.export.internal.error;
 import com.microsphere.common.code.export.Code;
 
 /**
- * todo...
+ * Client Bad Parameter Exception
  *
  * @author wunhwantseng@gmail.com
- * @since todo...
+ * @since 0.0.1
  **/
 public class ClientBadParameterCode implements Code {
 

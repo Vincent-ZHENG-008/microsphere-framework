@@ -1,15 +1,23 @@
 package com.microsphere.common.code.export;
 
 /**
- * todo...
+ * Interface of response code
  *
  * @author wunhwantseng@gmail.com
- * @since todo...
+ * @since 0.0.1
  **/
 public interface Code {
 
+    /**
+     * Response Code
+     *
+     * @return String of code
+     */
     String code();
 
+    /**
+     * Message of content
+     */
     String message();
 
 }

@@ -1,10 +1,12 @@
 package com.microsphere.common.container.context;
 
 /**
- * todo...
+ * Lifecycle of bean
+ *
+ * flow chart should be start --> stop
  *
  * @author wunhwantseng@gmail.com
- * @since todo...
+ * @since 0.0.1
  **/
 public interface Lifecycle {
 

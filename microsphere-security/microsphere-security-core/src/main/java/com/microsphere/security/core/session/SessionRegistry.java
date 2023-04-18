@@ -6,7 +6,7 @@ import java.util.Optional;
  * todo...
  *
  * @author wunhwantseng@gmail.com
- * @since todo...
+ * @since 0.0.1
  **/
 public interface SessionRegistry {
 

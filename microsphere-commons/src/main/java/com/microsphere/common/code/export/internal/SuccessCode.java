@@ -3,10 +3,10 @@ package com.microsphere.common.code.export.internal;
 import com.microsphere.common.code.export.Code;
 
 /**
- * todo...
+ * Request Success Code
  *
  * @author wunhwantseng@gmail.com
- * @since todo...
+ * @since 0.0.1
  **/
 public class SuccessCode implements Code {
 

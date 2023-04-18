@@ -6,7 +6,7 @@ import com.microsphere.common.logging.Log;
  * #: todo - what is this
  *
  * @author wunhwantseng@gmail.com
- * @since todo - since from which version
+ * @since 0.0.1
  */
 public class AdapterJDK9LoggerLog implements Log {
 

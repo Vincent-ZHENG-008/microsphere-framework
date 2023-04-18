@@ -13,7 +13,7 @@ import java.util.function.Function;
  * todo...
  *
  * @author wunhwantseng@gmail.com
- * @since todo...
+ * @since 0.0.1
  **/
 class LogFactory implements Log {
 

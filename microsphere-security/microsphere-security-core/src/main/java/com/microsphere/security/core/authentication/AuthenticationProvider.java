@@ -6,7 +6,7 @@ import com.microsphere.security.core.Authentication;
  * todo...
  *
  * @author wunhwantseng@gmail.com
- * @since todo...
+ * @since 0.0.1
  **/
 public interface AuthenticationProvider {
 

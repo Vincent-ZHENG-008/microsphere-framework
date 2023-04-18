@@ -22,9 +22,11 @@ import java.time.format.DateTimeFormatter;
 /**
  * @author wunhwantseng@gmail.com
  */
-public final class JsonJacksonObjectSerializable implements ObjectSerializable {
+final class JsonJacksonObjectSerializable implements ObjectSerializable {
 
     private volatile ObjectMapper mapper;
+
+    private final Object lock = new Object();
 
     public JsonJacksonObjectSerializable() {
 
@@ -96,7 +98,7 @@ public final class JsonJacksonObjectSerializable implements ObjectSerializable {
 
     private void instanceChecker() {
         if (mapper == null) {
-            synchronized (this) {
+            synchronized (lock) {
                 if (mapper == null) {
                     mapper = getInstance();
                 }

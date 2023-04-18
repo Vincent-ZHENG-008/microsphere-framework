@@ -1,6 +1,7 @@
 package com.microsphere.statemachine.support;
 
 
+import com.microsphere.common.value.ID;
 import com.microsphere.statemachine.Parameter;
 import com.microsphere.statemachine.StateMachine;
 import com.microsphere.statemachine.enumerate.FireResult;
@@ -13,6 +14,7 @@ import com.microsphere.statemachine.transition.Transition;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 
 /**
@@ -27,26 +29,49 @@ public class DefaultStateMachine<S, E> implements StateMachine<S, E> {
      * StateMachine ID
      * Default used uuid generator
      */
-    private final UUID id;
+    private final ID<UUID> id;
 
     /**
      * List of transition
      */
     private final Collection<Transition<S, E>> transitions;
 
+    /**
+     * Statemachine state
+     */
+    private volatile int running;
+
     public DefaultStateMachine(Collection<Transition<S, E>> transitions) {
-        this.id = UUID.randomUUID();
+        this.id = new MachineId(UUID.randomUUID());
         this.transitions = transitions;
+        start();
     }
 
     @Override
     public UUID getId() {
-        return id;
+        return id.getId();
     }
 
     @Override
     public Collection<Transition<S, E>> getTransitions() {
         return List.copyOf(this.transitions);
+    }
+
+    @Override
+    public void start() {
+        running = StateMachine.RUNNING;
+    }
+
+    @Override
+    public void stop() {
+        if (running == StateMachine.RUNNING) {
+            running = StateMachine.STOPPED;
+        }
+    }
+
+    @Override
+    public boolean isRunning() {
+        return running == StateMachine.RUNNING;
     }
 
     @Override
@@ -64,6 +89,8 @@ public class DefaultStateMachine<S, E> implements StateMachine<S, E> {
 
                 final State<S, E> source = transition.getSource();
                 try {
+                    long startTime = System.nanoTime();
+
                     // State entry event published
                     source.onEntry(stateContext);
 
@@ -71,8 +98,8 @@ public class DefaultStateMachine<S, E> implements StateMachine<S, E> {
                     transition.getActions().forEach(consumer -> consumer.accept(stateContext));
 
                     // Action listener published
-                    // Todo：wait to writing logic for computing time
-                    transition.publishEvent(this, stateContext, -1);
+                    long usedTime = TimeUnit.NANOSECONDS.toSeconds(System.nanoTime() - startTime);
+                    transition.publishEvent(this, stateContext, usedTime);
 
                     // State completed event published
                     source.onComplete(stateContext);
@@ -111,4 +138,5 @@ public class DefaultStateMachine<S, E> implements StateMachine<S, E> {
                 ", transitions=" + transitions +
                 '}';
     }
+
 }

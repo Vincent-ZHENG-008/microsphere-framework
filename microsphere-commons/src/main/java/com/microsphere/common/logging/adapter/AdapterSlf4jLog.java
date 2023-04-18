@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
  * #: todo - what is this
  *
  * @author wunhwantseng@gmail.com
- * @since todo - since from which version
+ * @since 0.0.1
  */
 public class AdapterSlf4jLog implements Log {
 

@@ -7,7 +7,7 @@ import jakarta.ws.rs.container.ContainerRequestFilter;
  * todo...
  *
  * @author wunhwantseng@gmail.com
- * @since todo...
+ * @since 0.0.1
  **/
 public class SecurityFilterChain implements ContainerRequestFilter {
 

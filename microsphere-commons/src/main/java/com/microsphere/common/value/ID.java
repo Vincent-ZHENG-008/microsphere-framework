@@ -1,10 +1,13 @@
 package com.microsphere.common.value;
 
 /**
- * todo...
+ * Id standard interface
  *
  * @author wunhwantseng@gmail.com
- * @since todo...
+ * @since 0.0.1
  **/
-public interface ID {
+public interface ID<T> {
+
+    T getId();
+
 }
