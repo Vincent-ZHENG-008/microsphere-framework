@@ -24,6 +24,7 @@
         <module>microsphere-parent</module>
         <module>microsphere-security</module>
         <module>microsphere-statemachine</module>
+        <module>microsphere-validation</module>
     </modules>
 
     <properties>
