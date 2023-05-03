@@ -5,12 +5,12 @@
 
     <parent>
         <groupId>com.microsphere</groupId>
-        <artifactId>microsphere-statemachine</artifactId>
+        <artifactId>microsphere-validation</artifactId>
         <version>${revision}</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>microsphere-statemachine-dependencies</artifactId>
+    <artifactId>microsphere-validation-dependencies</artifactId>
     <version>${revision}</version>
     <packaging>pom</packaging>
 

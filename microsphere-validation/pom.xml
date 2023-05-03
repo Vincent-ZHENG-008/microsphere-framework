@@ -10,13 +10,13 @@
         <relativePath>../microsphere-parent/pom.xml</relativePath>
     </parent>
 
-    <artifactId>microsphere-statemachine</artifactId>
+    <artifactId>microsphere-validation</artifactId>
     <version>${revision}</version>
     <packaging>pom</packaging>
 
     <modules>
-        <module>microsphere-statemachine-core</module>
-        <module>microsphere-statemachine-dependencies</module>
+        <module>microsphere-validation-core</module>
+        <module>microsphere-validation-dependencies</module>
     </modules>
 
     <properties>
