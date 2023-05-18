@@ -5,12 +5,12 @@
 
     <parent>
         <groupId>com.microsphere</groupId>
-        <artifactId>microsphere-parent</artifactId>
+        <artifactId>microsphere-validation</artifactId>
         <version>${revision}</version>
-        <relativePath>../microsphere-parent/pom.xml</relativePath>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>microsphere-commons</artifactId>
+    <artifactId>microsphere-validation-core</artifactId>
     <version>${revision}</version>
     <packaging>jar</packaging>
 
@@ -19,34 +19,40 @@
     </properties>
 
     <dependencies>
-        <!--  internal common dependencies-->
+        <!-- internal dependencies -->
         <dependency>
             <groupId>com.microsphere</groupId>
-            <artifactId>microsphere-core</artifactId>
+            <artifactId>microsphere-commons</artifactId>
             <version>${revision}</version>
         </dependency>
 
-        <!-- Slf4j -->
+        <!-- jakarta validation spi -->
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <optional>true</optional>
+            <groupId>jakarta.validation</groupId>
+            <artifactId>jakarta.validation-api</artifactId>
         </dependency>
 
-        <!-- Jackson Serialization -->
+        <!-- test -->
         <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <scope>test</scope>
             <optional>true</optional>
         </dependency>
         <dependency>
-            <groupId>com.fasterxml.jackson.dataformat</groupId>
-            <artifactId>jackson-dataformat-xml</artifactId>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.datatype</groupId>
-            <artifactId>jackson-datatype-jsr310</artifactId>
+            <groupId>org.glassfish.expressly</groupId>
+            <artifactId>expressly</artifactId>
+            <scope>test</scope>
             <optional>true</optional>
         </dependency>
     </dependencies>
@@ -55,7 +61,7 @@
         <dependencies>
             <dependency>
                 <groupId>com.microsphere</groupId>
-                <artifactId>microsphere-dependencies</artifactId>
+                <artifactId>microsphere-validation-dependencies</artifactId>
                 <version>${revision}</version>
                 <type>pom</type>
                 <scope>import</scope>
