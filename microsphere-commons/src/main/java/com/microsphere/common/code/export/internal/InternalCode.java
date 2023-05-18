@@ -8,10 +8,8 @@ import com.microsphere.common.code.export.internal.error.ClientBadParameterCode;
  * @author wunhwantseng@gmail.com
  * @since todo - since from which version
  */
-public interface InternalCode {
+public final class InternalCode {
 
-    SuccessCode SUCCESS = new SuccessCode();
-
-    ClientBadParameterCode BAD_PARAMETER = new ClientBadParameterCode();
+    public static final ClientBadParameterCode BAD_PARAMETER = new ClientBadParameterCode();
 
 }

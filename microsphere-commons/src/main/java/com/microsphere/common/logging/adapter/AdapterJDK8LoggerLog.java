@@ -27,61 +27,61 @@ public class AdapterJDK8LoggerLog implements Log {
 
     @Override
     public boolean isWarnEnabled() {
-        return false;
+        return delegate.isLoggable(Level.WARNING);
     }
 
     @Override
     public boolean isInfoEnabled() {
-        return false;
+        return delegate.isLoggable(Level.INFO);
     }
 
     @Override
     public boolean isDebugEnabled() {
-        return false;
+        return delegate.isLoggable(Level.FINEST);
     }
 
     @Override
     public boolean isTraceEnabled() {
-        return false;
+        return delegate.isLoggable(Level.FINER);
     }
 
     @Override
     public void error(String message) {
-
+        delegate.log(Level.SEVERE, message);
     }
 
     @Override
     public void error(String message, Object... parameters) {
-
+        delegate.log(Level.SEVERE, message, parameters);
     }
 
     @Override
     public void error(String message, Throwable err) {
-
+        delegate.log(Level.SEVERE, message, err);
     }
 
     @Override
     public void warn(String message, Object... parameters) {
-
+        delegate.log(Level.WARNING, message, parameters);
     }
 
     @Override
     public void warn(String message, Throwable err) {
-
+        delegate.log(Level.WARNING, message, err);
     }
 
     @Override
     public void info(String message, Object... parameters) {
-
+        delegate.log(Level.INFO, message, parameters);
     }
 
     @Override
     public void debug(String message, Object... parameters) {
-
+        delegate.log(Level.FINEST, message, parameters);
     }
 
     @Override
     public void trace(String message, Object... parameters) {
-
+        delegate.log(Level.FINEST, message, parameters);
     }
 }
