@@ -16,6 +16,9 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <jakarta.validation-api>3.0.2</jakarta.validation-api>
+        <hibernate.validation>8.0.0.Final</hibernate.validation>
+        <glassfish.expressly>5.0.0</glassfish.expressly>
     </properties>
 
     <dependencyManagement>
@@ -34,6 +37,23 @@
                 <groupId>com.microsphere</groupId>
                 <artifactId>microsphere-commons</artifactId>
                 <version>${revision}</version>
+            </dependency>
+
+            <!-- jakarta validation spi -->
+            <dependency>
+                <groupId>jakarta.validation</groupId>
+                <artifactId>jakarta.validation-api</artifactId>
+                <version>${jakarta.validation-api}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hibernate.validator</groupId>
+                <artifactId>hibernate-validator</artifactId>
+                <version>${hibernate.validation}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.glassfish.expressly</groupId>
+                <artifactId>expressly</artifactId>
+                <version>${glassfish.expressly}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

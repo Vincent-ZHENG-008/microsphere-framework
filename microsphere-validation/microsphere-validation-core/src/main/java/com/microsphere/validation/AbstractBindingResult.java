@@ -29,8 +29,13 @@ public abstract class AbstractBindingResult<T> implements BindingResult {
     }
 
     @Override
+    public boolean hasErrors() {
+        return !this.errors.isEmpty();
+    }
+
+    @Override
     public boolean hasFieldErrors() {
-        return this.errors.isEmpty();
+        return !this.errors.isEmpty();
     }
 
     @Override
@@ -49,7 +54,7 @@ public abstract class AbstractBindingResult<T> implements BindingResult {
 
     @Override
     public Collection<FieldError> getFieldErrors() {
-        if (hasFieldErrors()) {
+        if (!hasFieldErrors()) {
             return List.of();
         }
 

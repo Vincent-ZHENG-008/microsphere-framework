@@ -1,5 +1,6 @@
 package com.microsphere.common.logging;
 
+import com.microsphere.common.logging.adapter.AdapterJDK8LoggerLog;
 import com.microsphere.common.logging.adapter.AdapterJDK9LoggerLog;
 import com.microsphere.common.logging.adapter.AdapterSlf4jLog;
 import com.microsphere.core.util.Assert;
@@ -44,8 +45,7 @@ class LogFactory implements Log {
                 // 如果基于JDK9以上的版本，则默认使用JDK9新特性System.Logger
                 BRIDGE = AdapterJDK9LoggerLog::new;
             } else {
-                // 如果基于JDK9以下的版本，则默认使用JDK1.4版本的Logger
-//                BRIDGE = AdapterJDK8LoggerLog::new;
+                BRIDGE = AdapterJDK8LoggerLog::new;
             }
         }
     }
