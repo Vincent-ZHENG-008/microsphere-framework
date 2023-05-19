@@ -50,6 +50,22 @@ class StateMachineTest {
     }
 
     @Test
+    void transitionWrongEventTest() {
+        final String initialEvent = "initial";
+        final Consumer<StateContext<String, String>> action = ctx -> LOG.info("initial created");
+        final Transition<String, String> transition = new DefaultTransition<>(
+                new DefalutState<>(null, initialEvent), new DefalutState<>("created", null), new ObjectTrigger<>(initialEvent), null, List.of(action)
+        );
+
+        final StateMachine<String, String> statemachine = StateMachine.of(List.of(transition));
+        Assertions.assertNotNull(statemachine);
+        Assertions.assertNotNull(statemachine.getId());
+
+        final StateContext<String, String> result = statemachine.fire("end", Parameter.empty());
+        Assertions.assertEquals(result.getResult(), FireResult.Rejected);
+    }
+
+    @Test
     void parameterTest() {
         final String key = "ID";
         final String UserId = "USER_ID";
