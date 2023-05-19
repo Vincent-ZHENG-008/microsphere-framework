@@ -18,22 +18,25 @@ public class DefaultStateContext<S, E> implements StateContext<S, E> {
 
     private final Transition<S, E> transition;
 
+    private final E event;
+
     private final Parameter parameter;
 
     private Exception error;
 
     private FireResult result;
 
-    public DefaultStateContext(StateMachine<S, E> stateMachine, Transition<S, E> transition, Parameter parameter) {
+    public DefaultStateContext(StateMachine<S, E> stateMachine, Transition<S, E> transition, E event, Parameter parameter) {
         this.stateMachine = stateMachine;
         this.transition = transition;
+        this.event = event;
         this.parameter = parameter;
         this.error = null;
     }
 
     @Override
     public E getEvent() {
-        return getTransition().getTrigger().getEvent();
+        return this.event;
     }
 
     @Override

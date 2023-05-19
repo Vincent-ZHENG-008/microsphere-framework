@@ -16,6 +16,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <micrometer.version>1.11.0</micrometer.version>
     </properties>
 
     <dependencyManagement>
@@ -34,6 +35,15 @@
                 <groupId>com.microsphere</groupId>
                 <artifactId>microsphere-commons</artifactId>
                 <version>${revision}</version>
+            </dependency>
+
+            <!-- Metric Dependencies -->
+            <dependency>
+                <groupId>io.micrometer</groupId>
+                <artifactId>micrometer-bom</artifactId>
+                <version>${micrometer.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>

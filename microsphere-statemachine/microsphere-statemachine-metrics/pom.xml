@@ -10,7 +10,7 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>microsphere-statemachine-core</artifactId>
+    <artifactId>microsphere-statemachine-metrics</artifactId>
     <version>${revision}</version>
     <packaging>jar</packaging>
 
@@ -22,8 +22,18 @@
         <!-- internal dependencies -->
         <dependency>
             <groupId>com.microsphere</groupId>
-            <artifactId>microsphere-commons</artifactId>
+            <artifactId>microsphere-statemachine-core</artifactId>
             <version>${revision}</version>
+        </dependency>
+
+        <!-- micrometer dependencies -->
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-observation</artifactId>
         </dependency>
 
         <!-- test dependencies -->

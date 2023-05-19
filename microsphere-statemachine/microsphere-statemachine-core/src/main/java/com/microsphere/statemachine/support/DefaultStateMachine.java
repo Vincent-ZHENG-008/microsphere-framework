@@ -2,6 +2,7 @@ package com.microsphere.statemachine.support;
 
 
 import com.microsphere.common.value.ID;
+import com.microsphere.core.util.ObjectUtils;
 import com.microsphere.statemachine.Parameter;
 import com.microsphere.statemachine.StateMachine;
 import com.microsphere.statemachine.enumerate.FireResult;
@@ -32,6 +33,12 @@ public class DefaultStateMachine<S, E> implements StateMachine<S, E> {
     private final ID<UUID> id;
 
     /**
+     * StateMachine Name
+     * Default use {@linkplain DEFAULT_STATEMACHINE_NAME}
+     */
+    private final String name;
+
+    /**
      * List of transition
      */
     private final Collection<Transition<S, E>> transitions;
@@ -42,6 +49,11 @@ public class DefaultStateMachine<S, E> implements StateMachine<S, E> {
     private volatile int running;
 
     public DefaultStateMachine(Collection<Transition<S, E>> transitions) {
+        this(DEFAULT_STATEMACHINE_NAME, transitions);
+    }
+
+    public DefaultStateMachine(String name, Collection<Transition<S, E>> transitions) {
+        this.name = ObjectUtils.replaceIfNull(name, () -> DEFAULT_STATEMACHINE_NAME);
         this.id = new MachineId(UUID.randomUUID());
         this.transitions = transitions;
         start();
@@ -49,7 +61,12 @@ public class DefaultStateMachine<S, E> implements StateMachine<S, E> {
 
     @Override
     public UUID getId() {
-        return id.getId();
+        return this.id.getId();
+    }
+
+    @Override
+    public String getName() {
+        return this.name;
     }
 
     @Override
@@ -77,53 +94,54 @@ public class DefaultStateMachine<S, E> implements StateMachine<S, E> {
     @Override
     public StateContext<S, E> fire(E event, Parameter param) {
         for (Transition<S, E> transition : transitions) {
-            final DefaultStateContext<S, E> stateContext = new DefaultStateContext<>(this, transition, param);
-
-            if (transition.transit(stateContext)) {
-                final Function<StateContext<S, E>, Boolean> guard = transition.getGuard();
-                if (guard != null) {
-                    if (!guard.apply(stateContext)) {
-                        throw new GuardNonPassedException("Transition guard does not passed.");
-                    }
-                }
-
-                final State<S, E> source = transition.getSource();
-                try {
-                    long startTime = System.nanoTime();
-
-                    // State entry event published
-                    source.onEntry(stateContext);
-
-                    // Traversal all action
-                    transition.getActions().forEach(consumer -> consumer.accept(stateContext));
-
-                    // Action listener published
-                    long usedTime = TimeUnit.NANOSECONDS.toSeconds(System.nanoTime() - startTime);
-                    transition.publishEvent(this, stateContext, usedTime);
-
-                    // State completed event published
-                    source.onComplete(stateContext);
-
-                    // Result stage upgrade
-                    stateContext.resultRegistration(FireResult.Accepted);
-                } catch (Exception ex) {
-                    // StateContext error registration
-                    stateContext.abnormalRegistration(ex);
-
-                    // Result stage upgrade
-                    stateContext.resultRegistration(FireResult.Abnormal);
-                } finally {
-                    // State exist event published
-                    source.onExist(stateContext);
-                }
-
-                // Return StateContext
-                return stateContext;
+            final DefaultStateContext<S, E> stateContext = new DefaultStateContext<>(this, transition, event, param);
+            if (!transition.transit(stateContext)) {
+                continue;
             }
+
+            final Function<StateContext<S, E>, Boolean> guard = transition.getGuard();
+            if (guard != null) {
+                if (!guard.apply(stateContext)) {
+                    throw new GuardNonPassedException("Transition guard does not passed.");
+                }
+            }
+
+            final State<S, E> source = transition.getSource();
+            try {
+                long startTime = System.nanoTime();
+
+                // State entry event published
+                source.onEntry(stateContext);
+
+                // Traversal all action
+                transition.getActions().forEach(consumer -> consumer.accept(stateContext));
+
+                // Action listener published
+                long usedTime = TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - startTime);
+                transition.publishEvent(this, stateContext, usedTime);
+
+                // State completed event published
+                source.onComplete(stateContext);
+
+                // Result stage upgrade
+                stateContext.resultRegistration(FireResult.Accepted);
+            } catch (Exception ex) {
+                // StateContext error registration
+                stateContext.abnormalRegistration(ex);
+
+                // Result stage upgrade
+                stateContext.resultRegistration(FireResult.Abnormal);
+            } finally {
+                // State exist event published
+                source.onExist(stateContext);
+            }
+
+            // Return StateContext
+            return stateContext;
         }
 
         // Not found transition matcher, fallback return default result
-        final DefaultStateContext<S, E> fallback = new DefaultStateContext<>(this, null, param);
+        final DefaultStateContext<S, E> fallback = new DefaultStateContext<>(this, null, event, param);
         // Result stage upgrade
         fallback.resultRegistration(FireResult.Rejected);
         // Return StateContext

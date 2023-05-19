@@ -17,6 +17,8 @@
     <modules>
         <module>microsphere-statemachine-core</module>
         <module>microsphere-statemachine-dependencies</module>
+        <module>microsphere-statemachine-metrics</module>
+        <module>microsphere-statemachine-sample</module>
     </modules>
 
     <properties>

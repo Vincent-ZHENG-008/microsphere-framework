@@ -17,10 +17,18 @@ import java.util.UUID;
  */
 public interface StateMachine<S, E> extends Lifecycle {
 
+    /**
+     * Default stateMachine name
+     */
+    String DEFAULT_STATEMACHINE_NAME = "DefaultStateMachine";
+
     int RUNNING = 0;
 
     int STOPPED = 1;
+
     UUID getId();
+
+    String getName();
 
     Collection<Transition<S, E>> getTransitions();
 
