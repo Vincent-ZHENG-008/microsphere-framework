@@ -22,12 +22,29 @@ public interface StateMachine<S, E> extends Lifecycle {
      */
     String DEFAULT_STATEMACHINE_NAME = "DefaultStateMachine";
 
+    /**
+     * StateMachine running state
+     */
     int RUNNING = 0;
 
+    /**
+     * StateMachine stop state
+     */
     int STOPPED = 1;
 
+    /**
+     * StateMachine Id number
+     *
+     * @return UUID
+     */
     UUID getId();
 
+    /**
+     * Name of StateMachine
+     * Can use to be service name, like metrics collector or listener
+     *
+     * @return name of statemachine, should not return empty string or null. can use `DEFAULT_STATEMACHINE_NAME` of default statemacine name
+     */
     String getName();
 
     Collection<Transition<S, E>> getTransitions();

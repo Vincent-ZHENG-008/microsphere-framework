@@ -65,18 +65,21 @@ public class MetricsExtensionStateMachine<S, E> implements StateMachine<S, E> {
     @Override
     public StateContext<S, E> fire(E event, Parameter param) {
         final Observation.Context ctx = new Observation.Context();
-        final Observation observation = Observation.createNotStarted(getName(), () -> ctx, statistics);
+        final Observation observation = Observation
+                .createNotStarted(getName(), () -> ctx, statistics)
+                .lowCardinalityKeyValue("statemachine.name", this.getName());
 
-        return observation
-                .lowCardinalityKeyValue("statemachine.name", this.getName())
-                .observe(() -> {
-                    final StateContext<S, E> fired = this.delegate.fire(event, param);
+        try (Observation.Scope scope = observation.openScope()) {
+            observation.start();
 
-                    if (fired.getResult() == FireResult.Abnormal) {
-                        observation.error(fired.getException());
-                    }
+            final StateContext<S, E> fired = this.delegate.fire(event, param);
+            if (fired.getResult() == FireResult.Abnormal) {
+                observation.error(fired.getException());
+            }
 
-                    return fired;
-                });
+            return fired;
+        } finally {
+            observation.stop();
+        }
     }
 }
