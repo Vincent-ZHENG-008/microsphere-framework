@@ -37,17 +37,12 @@ public class AdapterJDK8LoggerLog implements Log {
 
     @Override
     public boolean isDebugEnabled() {
-        return delegate.isLoggable(Level.FINEST);
+        return delegate.isLoggable(Level.FINE);
     }
 
     @Override
     public boolean isTraceEnabled() {
         return delegate.isLoggable(Level.FINER);
-    }
-
-    @Override
-    public void error(String message) {
-        delegate.log(Level.SEVERE, message);
     }
 
     @Override
@@ -77,11 +72,11 @@ public class AdapterJDK8LoggerLog implements Log {
 
     @Override
     public void debug(String message, Object... parameters) {
-        delegate.log(Level.FINEST, message, parameters);
+        delegate.log(Level.FINE, message, parameters);
     }
 
     @Override
     public void trace(String message, Object... parameters) {
-        delegate.log(Level.FINEST, message, parameters);
+        delegate.log(Level.FINER, message, parameters);
     }
 }

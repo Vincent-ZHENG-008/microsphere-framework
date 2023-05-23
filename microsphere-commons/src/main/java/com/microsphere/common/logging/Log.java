@@ -18,8 +18,6 @@ public interface Log {
 
     boolean isTraceEnabled();
 
-    void error(String message);
-
     void error(String message, Object... parameters);
 
     void error(String message, Throwable err);

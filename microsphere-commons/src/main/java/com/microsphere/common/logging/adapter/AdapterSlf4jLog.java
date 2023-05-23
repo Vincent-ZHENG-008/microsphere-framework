@@ -44,11 +44,6 @@ public class AdapterSlf4jLog implements Log {
     }
 
     @Override
-    public void error(String message) {
-        log.error(message);
-    }
-
-    @Override
     public void error(String message, Object... parameters) {
         log.error(message, parameters);
     }
@@ -82,5 +77,6 @@ public class AdapterSlf4jLog implements Log {
     public void trace(String message, Object... parameters) {
         log.trace(message, parameters);
     }
+
 }
 

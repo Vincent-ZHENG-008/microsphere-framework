@@ -19,14 +19,14 @@
     </properties>
 
     <dependencies>
-        <!-- internal dependencies -->
+        <!-- Internal -->
         <dependency>
             <groupId>com.microsphere</groupId>
             <artifactId>microsphere-commons</artifactId>
             <version>${revision}</version>
         </dependency>
 
-        <!-- test dependencies -->
+        <!-- Test -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>

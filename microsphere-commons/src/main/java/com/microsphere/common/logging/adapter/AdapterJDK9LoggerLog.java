@@ -42,11 +42,6 @@ public class AdapterJDK9LoggerLog implements Log {
     }
 
     @Override
-    public void error(String message) {
-        delegate.log(System.Logger.Level.ERROR, message);
-    }
-
-    @Override
     public void error(String message, Object... parameters) {
         delegate.log(System.Logger.Level.ERROR, message, parameters);
     }
@@ -78,6 +73,6 @@ public class AdapterJDK9LoggerLog implements Log {
 
     @Override
     public void trace(String message, Object... parameters) {
-        delegate.log(System.Logger.Level.DEBUG, message, parameters);
+        delegate.log(System.Logger.Level.TRACE, message, parameters);
     }
 }

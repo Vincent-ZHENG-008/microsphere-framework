@@ -12,6 +12,16 @@ import java.util.function.Supplier;
  **/
 public class Assert {
 
+    public static void isTrue(Supplier<Boolean> judgement, Supplier<String> msg) {
+        isTrue(judgement.get(), msg);
+    }
+
+    public static void isTrue(boolean judgement, Supplier<String> msg) {
+        if (!judgement) {
+            throw new IllegalArgumentException(msg.get());
+        }
+    }
+
     public static boolean isNotNull(Object source) {
         return !isNull(source);
     }

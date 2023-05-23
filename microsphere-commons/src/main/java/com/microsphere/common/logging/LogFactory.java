@@ -80,11 +80,6 @@ class LogFactory implements Log {
     }
 
     @Override
-    public void error(String message) {
-        adapter.error(message);
-    }
-
-    @Override
     public void error(String message, Object... parameters) {
         adapter.error(message, parameters);
     }
