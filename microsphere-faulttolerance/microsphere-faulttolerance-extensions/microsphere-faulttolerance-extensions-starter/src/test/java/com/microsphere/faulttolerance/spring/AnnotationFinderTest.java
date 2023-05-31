@@ -16,7 +16,7 @@ import org.springframework.context.support.GenericApplicationContext;
  * @author wunhwantseng@gmail.com
  * @since todo - since from which version
  */
-public class AnnotationFinderTest {
+class AnnotationFinderTest {
 
     @Test
     void adviceFinderTest() {
