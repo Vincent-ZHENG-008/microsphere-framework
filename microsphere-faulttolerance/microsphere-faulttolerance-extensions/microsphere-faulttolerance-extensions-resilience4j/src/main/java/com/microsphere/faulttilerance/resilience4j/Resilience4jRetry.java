@@ -18,7 +18,7 @@ public class Resilience4jRetry implements Retry {
 
     private final io.github.resilience4j.retry.Retry delegate;
 
-    public Resilience4jRetry(String name, RetryRegistry retryRegistry, Retry.Options ops) {
+    public Resilience4jRetry(String name, RetryRegistry retryRegistry, RetryOptions ops) {
         this.delegate = retryRegistry.retry(name, configConverter(ops));
     }
 
@@ -44,7 +44,7 @@ public class Resilience4jRetry implements Retry {
         }
     }
 
-    private static RetryConfig configConverter(Retry.Options ops) {
+    private static RetryConfig configConverter(RetryOptions ops) {
         return RetryConfig.custom()
                 .maxAttempts(ops.getMaxRetries())
                 .waitDuration(Duration.of(ops.getDelay(), ops.getDelayUnit()))

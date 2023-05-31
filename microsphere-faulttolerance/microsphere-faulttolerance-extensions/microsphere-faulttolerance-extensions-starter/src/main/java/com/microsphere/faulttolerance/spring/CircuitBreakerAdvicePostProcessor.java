@@ -1,4 +1,4 @@
-package com.microsphere.faulttilerance.spring;
+package com.microsphere.faulttolerance.spring;
 
 import com.microsphere.faulttolerance.CircuitBreaker;
 import org.aopalliance.aop.Advice;

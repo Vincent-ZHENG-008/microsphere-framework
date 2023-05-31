@@ -1,4 +1,4 @@
-package com.microsphere.faulttilerance.spring;
+package com.microsphere.faulttolerance.spring;
 
 /**
  * #: todo - what is this

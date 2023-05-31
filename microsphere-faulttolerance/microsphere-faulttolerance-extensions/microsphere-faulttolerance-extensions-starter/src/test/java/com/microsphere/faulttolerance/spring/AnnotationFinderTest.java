@@ -1,4 +1,4 @@
-package com.microsphere.faulttilerance.spring;
+package com.microsphere.faulttolerance.spring;
 
 import com.microsphere.faulttilerance.resilience4j.Resilience4jCircuitBreaker;
 import com.microsphere.faulttolerance.CircuitBreaker;
@@ -36,8 +36,8 @@ public class AnnotationFinderTest {
     }
 
     @Configuration(proxyBeanMethods = false)
-    @ComponentScan(basePackages = "com.microsphere.faulttilerance.spring")
-    public static class FaultToleranceConfiguration {
+    @ComponentScan(basePackages = "com.microsphere.faulttolerance.spring")
+    private static class FaultToleranceConfiguration {
 
         @Bean
         public CircuitBreaker.CircuitBreakerOptions circuitBreakerOptions() {
@@ -50,7 +50,7 @@ public class AnnotationFinderTest {
         }
 
         @Bean
-        public CircuitBreakerAdvicePostProcessor faultTolerancePostProcessor(CircuitBreaker circuitBreaker) {
+        public CircuitBreakerAdvicePostProcessor circuitBreakerAdvicePostProcessor(CircuitBreaker circuitBreaker) {
             return new CircuitBreakerAdvicePostProcessor(circuitBreaker);
         }
 

@@ -39,6 +39,10 @@ public class Assert {
         return isNull(dict) || dict.size() == 0;
     }
 
+    public static boolean isEmpty(Object[] array) {
+        return isNull(array) || array.length == 0;
+    }
+
     public static <T> T notNull(T source, String msg) {
         return notNull(source, () -> msg);
     }

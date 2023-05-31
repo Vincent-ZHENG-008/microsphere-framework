@@ -1,4 +1,4 @@
-package com.microsphere.faulttilerance.spring;
+package com.microsphere.faulttolerance.spring;
 
 import org.eclipse.microprofile.faulttolerance.CircuitBreaker;
 import org.springframework.stereotype.Component;

@@ -20,7 +20,7 @@ class Resilience4jRetryTest {
 
     @Test
     void execute() {
-        final Retry.Options ops = new Retry.Options();
+        final Retry.RetryOptions ops = new Retry.RetryOptions();
         final Retry retry = new Resilience4jRetry("Test", RetryRegistry.ofDefaults(), ops);
 
         try {
@@ -36,7 +36,7 @@ class Resilience4jRetryTest {
 
     @Test
     void executeWithCircuitBreaker() {
-        final Retry.Options ops = new Retry.Options();
+        final Retry.RetryOptions ops = new Retry.RetryOptions();
         final CircuitBreaker.CircuitBreakerOptions circuitBreakerOptions = new CircuitBreaker.CircuitBreakerOptions();
 
         final CircuitBreaker circuitBreaker = new Resilience4jCircuitBreaker("Test", circuitBreakerOptions);

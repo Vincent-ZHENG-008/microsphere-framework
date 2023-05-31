@@ -1,9 +1,11 @@
 package com.microsphere.faulttolerance;
 
+import com.microsphere.core.util.Assert;
 import org.eclipse.microprofile.faulttolerance.exceptions.CircuitBreakerOpenException;
 import org.eclipse.microprofile.faulttolerance.exceptions.FaultToleranceException;
 
 import java.time.temporal.ChronoUnit;
+import java.util.Arrays;
 import java.util.function.Supplier;
 
 /**
@@ -18,7 +20,7 @@ public interface Retry {
 
     void execute(Runnable runnable);
 
-    final class Options {
+    final class RetryOptions {
 
         private int maxRetries = 3;
 
@@ -41,33 +43,39 @@ public interface Retry {
         @SuppressWarnings("unchecked")
         private Class<? extends Throwable>[] abortOn = new Class[]{FaultToleranceException.class, CircuitBreakerOpenException.class};
 
-        public Options setMaxRetries(int maxRetries) {
+        public RetryOptions maxRetries(int maxRetries) {
             this.maxRetries = maxRetries;
 
             return this;
         }
 
-        public Options setDelay(long delay) {
+        public RetryOptions delay(long delay) {
             this.delay = delay;
 
             return this;
         }
 
-        public Options setDelayUnit(ChronoUnit delayUnit) {
+        public RetryOptions delayUnit(ChronoUnit delayUnit) {
             this.delayUnit = delayUnit;
 
             return this;
         }
 
-        public Options setRetryOn(Class<? extends Throwable>[] retryOn) {
-            this.retryOn = retryOn;
+        public RetryOptions retryOn(Class<? extends Throwable>[] retryOn) {
+            if (Assert.isEmpty(retryOn)) {
+                return this;
+            }
 
+            this.retryOn = Arrays.copyOf(retryOn, retryOn.length);
             return this;
         }
 
-        public Options setAbortOn(Class<? extends Throwable>[] abortOn) {
-            this.abortOn = abortOn;
+        public RetryOptions abortOn(Class<? extends Throwable>[] abortOn) {
+            if (Assert.isEmpty(abortOn)) {
+                return this;
+            }
 
+            this.abortOn = Arrays.copyOf(abortOn, abortOn.length);
             return this;
         }
 
@@ -84,11 +92,11 @@ public interface Retry {
         }
 
         public Class<? extends Throwable>[] getRetryOn() {
-            return retryOn;
+            return Arrays.copyOf(retryOn, retryOn.length);
         }
 
         public Class<? extends Throwable>[] getAbortOn() {
-            return abortOn;
+            return Arrays.copyOf(abortOn, abortOn.length);
         }
     }
 
