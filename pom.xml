@@ -21,6 +21,7 @@
         <module>microsphere-commons</module>
         <module>microsphere-core</module>
         <module>microsphere-dependencies</module>
+        <module>microsphere-faulttolerance</module>
         <module>microsphere-parent</module>
         <module>microsphere-security</module>
         <module>microsphere-statemachine</module>

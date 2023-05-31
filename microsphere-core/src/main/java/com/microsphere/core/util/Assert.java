@@ -1,6 +1,7 @@
 package com.microsphere.core.util;
 
 import java.util.Collection;
+import java.util.Map;
 import java.util.Objects;
 import java.util.function.Supplier;
 
@@ -32,6 +33,10 @@ public class Assert {
 
     public static boolean isEmpty(Collection<?> collection) {
         return isNull(collection) || collection.size() == 0;
+    }
+
+    public static boolean isEmpty(Map<?, ?> dict) {
+        return isNull(dict) || dict.size() == 0;
     }
 
     public static <T> T notNull(T source, String msg) {
