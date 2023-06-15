@@ -1,8 +1,11 @@
-package com.microsphere.faulttolerance;
+package com.microsphere.faulttolerance.core;
 
 import com.microsphere.core.util.Assert;
 
 import java.time.temporal.ChronoUnit;
+import java.util.Arrays;
+import java.util.Map;
+import java.util.Optional;
 import java.util.function.Supplier;
 
 /**
@@ -18,6 +21,18 @@ public interface CircuitBreaker {
     void execute(Runnable runnable);
 
     class CircuitBreakerOptions {
+
+        /**
+         * @see org.eclipse.microprofile.faulttolerance.CircuitBreaker.failOn
+         */
+        @SuppressWarnings("unchecked")
+        private Class<? extends Throwable>[] failOn = new Class[]{Throwable.class};
+
+        /**
+         * @see org.eclipse.microprofile.faulttolerance.CircuitBreaker.skipOn
+         */
+        @SuppressWarnings("unchecked")
+        private Class<? extends Throwable>[] skipOn = new Class[]{};
 
         /**
          * @see org.eclipse.microprofile.faulttolerance.CircuitBreaker.delay
@@ -44,8 +59,37 @@ public interface CircuitBreaker {
          */
         private int successThreshold = 1;
 
+        @SuppressWarnings("unchecked")
+        public CircuitBreakerOptions(Map<String, Object> prop) {
+            Optional.ofNullable(prop.get("failOn")).ifPresent(val -> failOn((Class<? extends Throwable>[]) val));
+            Optional.ofNullable(prop.get("skipOn")).ifPresent(val -> skipOn((Class<? extends Throwable>[]) val));
+            Optional.ofNullable(prop.get("delay")).ifPresent(val -> delay((Long) val));
+            Optional.ofNullable(prop.get("delayUnit")).ifPresent(val -> delayUnit((ChronoUnit) val));
+            Optional.ofNullable(prop.get("requestVolumeThreshold")).ifPresent(val -> requestVolumeThreshold((Integer) val));
+            Optional.ofNullable(prop.get("failureRatio")).ifPresent(val -> failureRatio((Double) val));
+            Optional.ofNullable(prop.get("successThreshold")).ifPresent(val -> successThreshold((Integer) val));
+        }
+
+        public CircuitBreakerOptions failOn(Class<? extends Throwable>[] failOn) {
+            if (Assert.isEmpty(failOn)) {
+                return this;
+            }
+
+            this.failOn = Arrays.copyOf(failOn, failOn.length);
+            return this;
+        }
+
+        public CircuitBreakerOptions skipOn(Class<? extends Throwable>[] skipOn) {
+            if (Assert.isEmpty(skipOn)) {
+                return this;
+            }
+
+            this.skipOn = Arrays.copyOf(skipOn, skipOn.length);
+            return this;
+        }
+
         public CircuitBreakerOptions delay(long delay) {
-            Assert.isTrue(delay < 1000, () -> "delay must bigger than 1000");
+            Assert.isTrue(delay > 0, () -> "delay must bigger than 1000");
 
             this.delay = delay;
             return self();
@@ -59,24 +103,32 @@ public interface CircuitBreaker {
         }
 
         public CircuitBreakerOptions requestVolumeThreshold(int requestVolumeThreshold) {
-            Assert.isTrue(requestVolumeThreshold < 1, () -> "requestVolumeThreshold must bigger than 1");
+            Assert.isTrue(requestVolumeThreshold >= 1, () -> "requestVolumeThreshold must bigger than 1");
 
             this.requestVolumeThreshold = requestVolumeThreshold;
             return self();
         }
 
         public CircuitBreakerOptions failureRatio(double failureRatio) {
-            Assert.isTrue(failureRatio <= 0, () -> "failureRatio must bigger than 0");
+            Assert.isTrue(failureRatio > 0, () -> "failureRatio must bigger than 0");
 
             this.failureRatio = failureRatio;
             return self();
         }
 
         public CircuitBreakerOptions successThreshold(int successThreshold) {
-            Assert.isTrue(successThreshold < 1, () -> "failureRatio must bigger than 0");
+            Assert.isTrue(successThreshold >= 1, () -> "failureRatio must bigger than 0");
 
             this.successThreshold = successThreshold;
             return self();
+        }
+
+        public Class<? extends Throwable>[] getFailOn() {
+            return failOn;
+        }
+
+        public Class<? extends Throwable>[] getSkipOn() {
+            return skipOn;
         }
 
         public long getDelay() {

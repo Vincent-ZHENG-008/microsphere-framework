@@ -8,6 +8,6 @@ package com.microsphere.faulttolerance.spring;
  */
 public interface UserService {
 
-    void run();
+    String loadName();
 
 }

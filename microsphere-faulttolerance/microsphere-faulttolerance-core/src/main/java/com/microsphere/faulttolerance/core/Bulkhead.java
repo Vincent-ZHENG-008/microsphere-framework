@@ -1,4 +1,4 @@
-package com.microsphere.faulttolerance;
+package com.microsphere.faulttolerance.core;
 
 /**
  * #: todo - what is this
@@ -6,7 +6,7 @@ package com.microsphere.faulttolerance;
  * @author wunhwantseng@gmail.com
  * @since todo - since from which version
  */
-public interface Bulkhead {
+public interface Bulkhead extends ProxyCallable {
 
     class BulkheadOptions {
 

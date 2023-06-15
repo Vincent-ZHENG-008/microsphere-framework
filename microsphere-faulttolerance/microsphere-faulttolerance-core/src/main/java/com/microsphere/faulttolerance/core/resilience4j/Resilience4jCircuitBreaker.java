@@ -1,10 +1,13 @@
-package com.microsphere.faulttilerance.resilience4j;
+package com.microsphere.faulttolerance.core.resilience4j;
 
-import com.microsphere.faulttolerance.CircuitBreaker;
+import com.microsphere.faulttolerance.core.CircuitBreaker;
+import com.microsphere.faulttolerance.core.ConfigConverter;
 import io.github.resilience4j.circuitbreaker.CallNotPermittedException;
 import io.github.resilience4j.circuitbreaker.CircuitBreakerConfig;
+import io.github.resilience4j.circuitbreaker.CircuitBreakerRegistry;
 import org.eclipse.microprofile.faulttolerance.exceptions.CircuitBreakerOpenException;
 
+import java.time.Duration;
 import java.util.function.Supplier;
 
 /**
@@ -13,12 +16,12 @@ import java.util.function.Supplier;
  * @author wunhwantseng@gmail.com
  * @since todo - since from which version
  */
-public class Resilience4jCircuitBreaker implements CircuitBreaker {
+public class Resilience4jCircuitBreaker implements CircuitBreaker, ConfigConverter<CircuitBreaker.CircuitBreakerOptions,CircuitBreakerConfig> {
 
     private final io.github.resilience4j.circuitbreaker.CircuitBreaker delegate;
 
-    public Resilience4jCircuitBreaker(String name, CircuitBreaker.CircuitBreakerOptions ops) {
-        this.delegate = io.github.resilience4j.circuitbreaker.CircuitBreaker.of(name, configConverter(ops));
+    public Resilience4jCircuitBreaker(CircuitBreakerRegistry circuitBreakerRegistry, String name, CircuitBreaker.CircuitBreakerOptions ops) {
+        this.delegate = circuitBreakerRegistry.circuitBreaker(name, convert(ops));
     }
 
     @Override
@@ -39,10 +42,15 @@ public class Resilience4jCircuitBreaker implements CircuitBreaker {
         }
     }
 
-    private static CircuitBreakerConfig configConverter(CircuitBreaker.CircuitBreakerOptions ops) {
+    @Override
+    public CircuitBreakerConfig convert(CircuitBreakerOptions ops) {
         return CircuitBreakerConfig.custom()
-                .failureRateThreshold((float) ops.getFailureRatio())
                 .minimumNumberOfCalls(ops.getRequestVolumeThreshold())
+                .failureRateThreshold((float) 20)
+                .waitDurationInOpenState(Duration.of(ops.getDelay(), ops.getDelayUnit()))
+                .permittedNumberOfCallsInHalfOpenState(ops.getSuccessThreshold())
+                .recordExceptions(ops.getFailOn())
+                .ignoreExceptions(ops.getSkipOn())
                 .build();
     }
 }

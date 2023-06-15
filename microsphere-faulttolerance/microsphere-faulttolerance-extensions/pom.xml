@@ -20,7 +20,6 @@
     </properties>
 
     <modules>
-        <module>microsphere-faulttolerance-extensions-resilience4j</module>
         <module>microsphere-faulttolerance-extensions-starter</module>
     </modules>
 

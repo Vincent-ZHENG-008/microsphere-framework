@@ -1,4 +1,4 @@
-package com.microsphere.faulttolerance;
+package com.microsphere.faulttolerance.core;
 
 import com.microsphere.core.util.Assert;
 import org.eclipse.microprofile.faulttolerance.exceptions.CircuitBreakerOpenException;
@@ -6,7 +6,8 @@ import org.eclipse.microprofile.faulttolerance.exceptions.FaultToleranceExceptio
 
 import java.time.temporal.ChronoUnit;
 import java.util.Arrays;
-import java.util.function.Supplier;
+import java.util.Map;
+import java.util.Optional;
 
 /**
  * #: todo - what is this
@@ -14,16 +15,18 @@ import java.util.function.Supplier;
  * @author wunhwantseng@gmail.com
  * @since todo - since from which version
  */
-public interface Retry {
-
-    <T> T execute(Supplier<T> supplier);
-
-    void execute(Runnable runnable);
+public interface Retry extends ProxyCallable {
 
     final class RetryOptions {
 
+        /**
+         * @see org.eclipse.microprofile.faulttolerance.Retry.maxRetries
+         */
         private int maxRetries = 3;
 
+        /**
+         * @see org.eclipse.microprofile.faulttolerance.Retry.delay
+         */
         private long delay = 0;
 
         /**
@@ -42,6 +45,15 @@ public interface Retry {
          */
         @SuppressWarnings("unchecked")
         private Class<? extends Throwable>[] abortOn = new Class[]{FaultToleranceException.class, CircuitBreakerOpenException.class};
+
+        @SuppressWarnings("unchecked")
+        public RetryOptions(Map<String, Object> prop) {
+            Optional.ofNullable(prop.get("maxRetries")).ifPresent(val -> maxRetries((Integer) val));
+            Optional.ofNullable(prop.get("delay")).ifPresent(val -> delay((Long) val));
+            Optional.ofNullable(prop.get("delayUnit")).ifPresent(val -> delayUnit((ChronoUnit) val));
+            Optional.ofNullable(prop.get("retryOn")).ifPresent(val -> retryOn((Class<? extends Throwable>[]) val));
+            Optional.ofNullable(prop.get("abortOn")).ifPresent(val -> abortOn((Class<? extends Throwable>[]) val));
+        }
 
         public RetryOptions maxRetries(int maxRetries) {
             this.maxRetries = maxRetries;

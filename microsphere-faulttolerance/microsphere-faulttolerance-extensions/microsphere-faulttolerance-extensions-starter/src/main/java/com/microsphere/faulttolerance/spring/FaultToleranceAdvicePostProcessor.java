@@ -1,13 +1,17 @@
 package com.microsphere.faulttolerance.spring;
 
-import com.microsphere.faulttolerance.CircuitBreaker;
 import org.aopalliance.aop.Advice;
+import org.eclipse.microprofile.faulttolerance.Bulkhead;
+import org.eclipse.microprofile.faulttolerance.CircuitBreaker;
+import org.eclipse.microprofile.faulttolerance.Retry;
+import org.eclipse.microprofile.faulttolerance.Timeout;
 import org.springframework.aop.Pointcut;
 import org.springframework.aop.framework.autoproxy.AbstractBeanFactoryAwareAdvisingPostProcessor;
 import org.springframework.aop.support.DefaultPointcutAdvisor;
-import org.springframework.aop.support.annotation.AnnotationMatchingPointcut;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Component;
+
+import java.lang.annotation.Annotation;
 
 /**
  * #: todo - what is this
@@ -15,22 +19,21 @@ import org.springframework.stereotype.Component;
  * @author wunhwantseng@gmail.com
  * @since todo - since from which version
  */
-public class CircuitBreakerAdvicePostProcessor extends AbstractBeanFactoryAwareAdvisingPostProcessor
+public class FaultToleranceAdvicePostProcessor extends AbstractBeanFactoryAwareAdvisingPostProcessor
         implements InitializingBean {
 
-    private final CircuitBreaker circuitBreaker;
-
-    public CircuitBreakerAdvicePostProcessor(CircuitBreaker circuitBreaker) {
-        this.circuitBreaker = circuitBreaker;
-    }
+    @SuppressWarnings("unchecked")
+    private static final Class<? extends Annotation>[] ANNOTATION_CLASS = new Class[]{
+            CircuitBreaker.class, Timeout.class, Retry.class, Bulkhead.class
+    };
 
     @Override
     public void afterPropertiesSet() {
-        Pointcut pointcut = new AnnotationMatchingPointcut(Component.class, org.eclipse.microprofile.faulttolerance.CircuitBreaker.class, true);
+        Pointcut pointcut = new AnnotationMatchingPointcut(Component.class, ANNOTATION_CLASS, true);
         this.advisor = new DefaultPointcutAdvisor(pointcut, createMethodAdvice());
     }
 
     protected Advice createMethodAdvice() {
-        return new MethodCircuitBreakerInterceptor(circuitBreaker);
+        return new CompositeMethodInterceptor();
     }
 }

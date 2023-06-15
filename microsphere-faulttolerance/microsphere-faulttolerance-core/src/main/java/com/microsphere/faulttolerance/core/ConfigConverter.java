@@ -1,4 +1,4 @@
-package com.microsphere.faulttolerance;
+package com.microsphere.faulttolerance.core;
 
 /**
  * #: todo - what is this
@@ -6,8 +6,8 @@ package com.microsphere.faulttolerance;
  * @author wunhwantseng@gmail.com
  * @since todo - since from which version
  */
-public interface FallbackHandler<T> {
+public interface ConfigConverter<T, R> {
 
-    T handle(ExecutionContext context);
+    R convert(T config);
 
 }
