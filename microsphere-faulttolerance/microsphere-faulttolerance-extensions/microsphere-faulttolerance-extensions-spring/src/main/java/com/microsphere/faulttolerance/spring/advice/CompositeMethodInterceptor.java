@@ -27,8 +27,6 @@ public class CompositeMethodInterceptor implements MethodInterceptor {
 
     private static final Class<Fallback> FALLBACK_CLASS = Fallback.class;
 
-    private static final Log LOG = Log.getFactory(CompositeMethodInterceptor.class);
-
     private final Map<Method, ProxyCallable> invokers = new ConcurrentHashMap<>();
 
     private final Collection<FaultToleranceMatcher> faultToleranceMatchers;

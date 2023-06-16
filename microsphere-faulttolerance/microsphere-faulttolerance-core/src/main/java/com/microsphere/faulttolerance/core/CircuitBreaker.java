@@ -58,11 +58,11 @@ public interface CircuitBreaker extends ProxyCallable {
         public CircuitBreakerOptions(Map<String, Object> prop) {
             Optional.ofNullable(prop.get("failOn")).ifPresent(val -> failOn((Class<? extends Throwable>[]) val));
             Optional.ofNullable(prop.get("skipOn")).ifPresent(val -> skipOn((Class<? extends Throwable>[]) val));
-            Optional.ofNullable(prop.get("delay")).ifPresent(val -> delay((Long) val));
+            Optional.ofNullable(prop.get("delay")).ifPresent(val -> delay((long) val));
             Optional.ofNullable(prop.get("delayUnit")).ifPresent(val -> delayUnit((ChronoUnit) val));
-            Optional.ofNullable(prop.get("requestVolumeThreshold")).ifPresent(val -> requestVolumeThreshold((Integer) val));
-            Optional.ofNullable(prop.get("failureRatio")).ifPresent(val -> failureRatio((Double) val));
-            Optional.ofNullable(prop.get("successThreshold")).ifPresent(val -> successThreshold((Integer) val));
+            Optional.ofNullable(prop.get("requestVolumeThreshold")).ifPresent(val -> requestVolumeThreshold((int) val));
+            Optional.ofNullable(prop.get("failureRatio")).ifPresent(val -> failureRatio((double) val));
+            Optional.ofNullable(prop.get("successThreshold")).ifPresent(val -> successThreshold((int) val));
         }
 
         public CircuitBreakerOptions failOn(Class<? extends Throwable>[] failOn) {
@@ -119,11 +119,11 @@ public interface CircuitBreaker extends ProxyCallable {
         }
 
         public Class<? extends Throwable>[] getFailOn() {
-            return failOn;
+            return Arrays.copyOf(failOn, failOn.length);
         }
 
         public Class<? extends Throwable>[] getSkipOn() {
-            return skipOn;
+            return Arrays.copyOf(skipOn, skipOn.length);
         }
 
         public long getDelay() {

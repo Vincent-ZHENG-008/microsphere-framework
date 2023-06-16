@@ -7,6 +7,7 @@ import org.springframework.core.annotation.AnnotatedElementUtils;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
+import java.util.Arrays;
 
 /**
  * #: todo - what is this
@@ -21,7 +22,7 @@ public class CompositeMethodFilter extends StaticMethodMatcher {
     private final boolean checkInherited;
 
     public CompositeMethodFilter(Class<? extends Annotation>[] methodAnnotationTypes, boolean checkInherited) {
-        this.methodAnnotationTypes = methodAnnotationTypes;
+        this.methodAnnotationTypes = Arrays.copyOf(methodAnnotationTypes, methodAnnotationTypes.length);
         this.checkInherited = checkInherited;
     }
 

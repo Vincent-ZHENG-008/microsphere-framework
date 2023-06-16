@@ -24,8 +24,8 @@ public interface Bulkhead extends ProxyCallable {
         private int waitingTaskQueue = 10;
 
         public BulkheadOptions(Map<String, Object> prop) {
-            Optional.ofNullable(prop.get("concurrentCalls")).ifPresent(val -> concurrentCalls((Integer) val));
-            Optional.ofNullable(prop.get("waitingTaskQueue")).ifPresent(val -> waitingTaskQueue((Integer) val));
+            Optional.ofNullable(prop.get("concurrentCalls")).ifPresent(val -> concurrentCalls((int) val));
+            Optional.ofNullable(prop.get("waitingTaskQueue")).ifPresent(val -> waitingTaskQueue((int) val));
         }
 
         public BulkheadOptions concurrentCalls(int concurrentCalls) {

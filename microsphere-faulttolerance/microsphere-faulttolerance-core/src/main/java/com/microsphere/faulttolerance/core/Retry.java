@@ -48,8 +48,8 @@ public interface Retry extends ProxyCallable {
 
         @SuppressWarnings("unchecked")
         public RetryOptions(Map<String, Object> prop) {
-            Optional.ofNullable(prop.get("maxRetries")).ifPresent(val -> maxRetries((Integer) val));
-            Optional.ofNullable(prop.get("delay")).ifPresent(val -> delay((Long) val));
+            Optional.ofNullable(prop.get("maxRetries")).ifPresent(val -> maxRetries((int) val));
+            Optional.ofNullable(prop.get("delay")).ifPresent(val -> delay((long) val));
             Optional.ofNullable(prop.get("delayUnit")).ifPresent(val -> delayUnit((ChronoUnit) val));
             Optional.ofNullable(prop.get("retryOn")).ifPresent(val -> retryOn((Class<? extends Throwable>[]) val));
             Optional.ofNullable(prop.get("abortOn")).ifPresent(val -> abortOn((Class<? extends Throwable>[]) val));
