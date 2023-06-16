@@ -6,7 +6,6 @@ import java.time.temporal.ChronoUnit;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.Optional;
-import java.util.function.Supplier;
 
 /**
  * #: todo - what is this
@@ -14,11 +13,7 @@ import java.util.function.Supplier;
  * @author wunhwantseng@gmail.com
  * @since todo - since from which version
  */
-public interface CircuitBreaker {
-
-    <T> T execute(Supplier<T> supplier);
-
-    void execute(Runnable runnable);
+public interface CircuitBreaker extends ProxyCallable {
 
     class CircuitBreakerOptions {
 

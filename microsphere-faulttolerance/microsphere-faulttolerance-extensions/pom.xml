@@ -20,7 +20,7 @@
     </properties>
 
     <modules>
-        <module>microsphere-faulttolerance-extensions-starter</module>
+        <module>microsphere-faulttolerance-extensions-spring</module>
     </modules>
 
     <dependencyManagement>

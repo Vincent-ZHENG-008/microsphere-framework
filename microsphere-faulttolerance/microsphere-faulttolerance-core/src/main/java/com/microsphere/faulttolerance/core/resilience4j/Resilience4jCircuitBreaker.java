@@ -1,5 +1,6 @@
 package com.microsphere.faulttolerance.core.resilience4j;
 
+import com.microsphere.common.logging.Log;
 import com.microsphere.faulttolerance.core.CircuitBreaker;
 import com.microsphere.faulttolerance.core.ConfigConverter;
 import io.github.resilience4j.circuitbreaker.CallNotPermittedException;
@@ -18,6 +19,8 @@ import java.util.function.Supplier;
  */
 public class Resilience4jCircuitBreaker implements CircuitBreaker, ConfigConverter<CircuitBreaker.CircuitBreakerOptions,CircuitBreakerConfig> {
 
+    private static final Log LOG = Log.getFactory(Resilience4jCircuitBreaker.class);
+
     private final io.github.resilience4j.circuitbreaker.CircuitBreaker delegate;
 
     public Resilience4jCircuitBreaker(CircuitBreakerRegistry circuitBreakerRegistry, String name, CircuitBreaker.CircuitBreakerOptions ops) {
@@ -29,15 +32,10 @@ public class Resilience4jCircuitBreaker implements CircuitBreaker, ConfigConvert
         try {
             return this.delegate.executeSupplier(supplier);
         } catch (CallNotPermittedException ex) {
-            throw new CircuitBreakerOpenException();
-        }
-    }
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("CircuitBreaker open...");
+            }
 
-    @Override
-    public void execute(Runnable runnable) {
-        try {
-            this.delegate.executeRunnable(runnable);
-        } catch (CallNotPermittedException ex) {
             throw new CircuitBreakerOpenException();
         }
     }
@@ -46,7 +44,7 @@ public class Resilience4jCircuitBreaker implements CircuitBreaker, ConfigConvert
     public CircuitBreakerConfig convert(CircuitBreakerOptions ops) {
         return CircuitBreakerConfig.custom()
                 .minimumNumberOfCalls(ops.getRequestVolumeThreshold())
-                .failureRateThreshold((float) 20)
+                .failureRateThreshold((float) ops.getFailureRatio())
                 .waitDurationInOpenState(Duration.of(ops.getDelay(), ops.getDelayUnit()))
                 .permittedNumberOfCallsInHalfOpenState(ops.getSuccessThreshold())
                 .recordExceptions(ops.getFailOn())

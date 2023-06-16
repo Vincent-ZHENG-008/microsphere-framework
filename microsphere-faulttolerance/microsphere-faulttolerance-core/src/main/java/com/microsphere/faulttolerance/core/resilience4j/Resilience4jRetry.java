@@ -4,7 +4,6 @@ import com.microsphere.faulttolerance.core.ConfigConverter;
 import com.microsphere.faulttolerance.core.Retry;
 import io.github.resilience4j.retry.RetryConfig;
 import io.github.resilience4j.retry.RetryRegistry;
-import org.eclipse.microprofile.faulttolerance.exceptions.FaultToleranceException;
 
 import java.time.Duration;
 import java.util.function.Supplier;
@@ -25,11 +24,7 @@ public class Resilience4jRetry implements Retry, ConfigConverter<Retry.RetryOpti
 
     @Override
     public <T> T execute(Supplier<T> supplier) {
-        try {
-            return this.delegate.executeSupplier(supplier);
-        } catch (Throwable ex) {
-            throw new FaultToleranceException(ex);
-        }
+        return this.delegate.executeSupplier(supplier);
     }
 
     @Override

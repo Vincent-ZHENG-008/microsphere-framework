@@ -17,18 +17,13 @@ public class Resilience4jBulkhead implements Bulkhead, ConfigConverter<Bulkhead.
 
     private final io.github.resilience4j.bulkhead.Bulkhead delegate;
 
-    public Resilience4jBulkhead(BulkheadRegistry bulkheadRegistry, String name, BulkheadOptions ops) {
+    public Resilience4jBulkhead(String name, BulkheadRegistry bulkheadRegistry, BulkheadOptions ops) {
         this.delegate = bulkheadRegistry.bulkhead(name, convert(ops));
     }
 
     @Override
     public <T> T execute(Supplier<T> supplier) {
         return this.delegate.executeSupplier(supplier);
-    }
-
-    @Override
-    public void execute(Runnable runnable) {
-        this.delegate.executeRunnable(runnable);
     }
 
     @Override
