@@ -5,12 +5,12 @@
 
     <parent>
         <groupId>com.microsphere</groupId>
-        <artifactId>microsphere-faulttolerance</artifactId>
+        <artifactId>microsphere-faulttolerance-extensions</artifactId>
         <version>${revision}</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>microsphere-faulttolerance-core</artifactId>
+    <artifactId>microsphere-faulttolerance-extensions-spring</artifactId>
     <version>${revision}</version>
     <packaging>jar</packaging>
 
@@ -32,23 +32,18 @@
     </dependencyManagement>
 
     <dependencies>
-        <!-- Internal Dependencies -->
+        <!-- SpringBoot Dependencies -->
         <dependency>
-            <groupId>com.microsphere</groupId>
-            <artifactId>microsphere-commons</artifactId>
-            <version>${revision}</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
         </dependency>
-
-        <!-- Jakarta Dependencies -->
         <dependency>
-            <groupId>jakarta.interceptor</groupId>
-            <artifactId>jakarta.interceptor-api</artifactId>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aop</artifactId>
         </dependency>
-
-        <!-- Microprofile Dependencies -->
         <dependency>
-            <groupId>org.eclipse.microprofile.fault-tolerance</groupId>
-            <artifactId>microprofile-fault-tolerance-api</artifactId>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
         </dependency>
 
         <!-- Resilience4j Dependencies -->
@@ -66,6 +61,12 @@
             <groupId>io.github.resilience4j</groupId>
             <artifactId>resilience4j-bulkhead</artifactId>
             <optional>true</optional>
+        </dependency>
+
+        <!-- Test Dependencies -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
         </dependency>
     </dependencies>
 
