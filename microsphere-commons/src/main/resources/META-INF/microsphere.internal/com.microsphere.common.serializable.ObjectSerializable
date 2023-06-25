@@ -1,2 +1,2 @@
-com.microsphere.common.serializable.xml.XmlJacksonObjectSerializable
-com.microsphere.common.serializable.json.JsonJacksonObjectSerializable
+xml=com.microsphere.common.serializable.xml.XmlJacksonObjectSerializable
+json=com.microsphere.common.serializable.json.JsonJacksonObjectSerializable

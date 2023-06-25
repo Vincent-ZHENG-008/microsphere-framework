@@ -1,0 +1,2 @@
+user = com.microsphere.core.extension.support.UserServiceProvider
+role = com.microsphere.core.extension.support.RoleServiceProvider

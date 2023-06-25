@@ -1,6 +1,6 @@
 package com.microsphere.statemachine;
 
-import com.microsphere.common.container.context.Lifecycle;
+import com.microsphere.core.context.Lifecycle;
 import com.microsphere.common.value.ID;
 import com.microsphere.statemachine.state.StateContext;
 import com.microsphere.statemachine.support.DefaultStateMachine;

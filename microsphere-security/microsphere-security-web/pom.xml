@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.microsphere</groupId>
+        <groupId>com.wunhwan</groupId>
         <artifactId>microsphere-security</artifactId>
         <version>${revision}</version>
         <relativePath>../pom.xml</relativePath>
@@ -21,12 +21,12 @@
     <dependencies>
         <!-- internal dependencies -->
         <dependency>
-            <groupId>com.microsphere</groupId>
+            <groupId>com.wunhwan</groupId>
             <artifactId>microsphere-commons</artifactId>
             <version>${revision}</version>
         </dependency>
         <dependency>
-            <groupId>com.microsphere</groupId>
+            <groupId>com.wunhwan</groupId>
             <artifactId>microsphere-security-core</artifactId>
             <version>${revision}</version>
         </dependency>
@@ -50,7 +50,7 @@
         <!-- MicroSphere Security Dependencies -->
         <dependencies>
             <dependency>
-                <groupId>com.microsphere</groupId>
+                <groupId>com.wunhwan</groupId>
                 <artifactId>microsphere-security-dependencies</artifactId>
                 <version>${revision}</version>
                 <type>pom</type>

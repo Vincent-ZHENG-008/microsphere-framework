@@ -1,0 +1,2 @@
+com.microsphere.core.extension.context.MicrosphereInternalLoadStrategy
+com.microsphere.core.extension.context.ServicesLoadingStrategy

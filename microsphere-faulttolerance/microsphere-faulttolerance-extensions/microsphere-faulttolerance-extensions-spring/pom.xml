@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.microsphere</groupId>
+        <groupId>com.wunhwan</groupId>
         <artifactId>microsphere-faulttolerance-extensions</artifactId>
         <version>${revision}</version>
         <relativePath>../pom.xml</relativePath>
@@ -22,7 +22,7 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>com.microsphere</groupId>
+                <groupId>com.wunhwan</groupId>
                 <artifactId>microsphere-faulttolerance-dependencies</artifactId>
                 <version>${revision}</version>
                 <type>pom</type>
@@ -32,11 +32,7 @@
     </dependencyManagement>
 
     <dependencies>
-        <!-- SpringBoot Dependencies -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
-        </dependency>
+        <!-- Spring Dependencies -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-aop</artifactId>

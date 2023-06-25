@@ -9,7 +9,7 @@
         <version>25</version>
     </parent>
 
-    <groupId>com.microsphere</groupId>
+    <groupId>com.wunhwan</groupId>
     <artifactId>microsphere-framework</artifactId>
     <version>${revision}</version>
     <packaging>pom</packaging>
@@ -25,7 +25,6 @@
         <module>microsphere-parent</module>
         <module>microsphere-security</module>
         <module>microsphere-statemachine</module>
-        <module>microsphere-validation</module>
     </modules>
 
     <properties>

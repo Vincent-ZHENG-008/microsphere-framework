@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.microsphere</groupId>
+        <groupId>com.wunhwan</groupId>
         <artifactId>microsphere-parent</artifactId>
         <version>${revision}</version>
         <relativePath>../microsphere-parent/pom.xml</relativePath>
@@ -21,7 +21,7 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>com.microsphere</groupId>
+                <groupId>com.wunhwan</groupId>
                 <artifactId>microsphere-dependencies</artifactId>
                 <version>${revision}</version>
                 <type>pom</type>
@@ -29,5 +29,29 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <dependencies>
+        <!-- CollectionUtils Dependencies -->
+        <dependency>
+            <groupId>org.eclipse.collections</groupId>
+            <artifactId>eclipse-collections-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.collections</groupId>
+            <artifactId>eclipse-collections</artifactId>
+        </dependency>
+
+        <!-- Test -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
 </project>

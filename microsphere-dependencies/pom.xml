@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.microsphere</groupId>
+        <groupId>com.wunhwan</groupId>
         <artifactId>microsphere-parent</artifactId>
         <version>${revision}</version>
         <relativePath>../microsphere-parent/pom.xml</relativePath>
@@ -20,6 +20,9 @@
         <!-- otel -->
         <otel.version>1.23.1</otel.version>
 
+        <!-- EclipseCollections -->
+        <version.eclipse-collections>11.1.0</version.eclipse-collections>
+
         <!-- Jackson -->
         <jackson.version>2.14.2</jackson.version>
 
@@ -29,8 +32,6 @@
 
         <!-- Junit-jupiter -->
         <junit-jupiter.version>5.9.2</junit-jupiter.version>
-        <!-- Mockito -->
-        <mockito.version>5.1.1</mockito.version>
     </properties>
 
     <dependencyManagement>
@@ -61,6 +62,18 @@
                 <version>${jackson.version}</version>
             </dependency>
 
+            <!-- EclipseCollections -->
+            <dependency>
+                <groupId>org.eclipse.collections</groupId>
+                <artifactId>eclipse-collections-api</artifactId>
+                <version>${version.eclipse-collections}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.eclipse.collections</groupId>
+                <artifactId>eclipse-collections</artifactId>
+                <version>${version.eclipse-collections}</version>
+            </dependency>
+
             <!-- Slf4j logging -->
             <dependency>
                 <groupId>org.slf4j</groupId>
@@ -86,13 +99,6 @@
                 <artifactId>junit-jupiter-engine</artifactId>
                 <version>${junit-jupiter.version}</version>
                 <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.mockito</groupId>
-                <artifactId>mockito-bom</artifactId>
-                <version>${mockito.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>

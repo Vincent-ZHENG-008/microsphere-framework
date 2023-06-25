@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.microsphere</groupId>
+        <groupId>com.wunhwan</groupId>
         <artifactId>microsphere-parent</artifactId>
         <version>${revision}</version>
         <relativePath>../microsphere-parent/pom.xml</relativePath>
