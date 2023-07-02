@@ -1,6 +1,7 @@
 package com.microsphere.statemachine;
 
 import com.microsphere.common.logging.Log;
+import com.microsphere.core.value.Params;
 import com.microsphere.statemachine.enumerate.FireResult;
 import com.microsphere.statemachine.listener.ActionListener;
 import com.microsphere.statemachine.listener.StateListener;
@@ -39,7 +40,7 @@ public class EventTest {
         Assertions.assertNotNull(statemachine);
         Assertions.assertNotNull(statemachine.getId());
 
-        final StateContext<String, String> result = statemachine.fire("initial", Parameter.empty());
+        final StateContext<String, String> result = statemachine.fire("initial", Params.create());
         Assertions.assertEquals(result.getResult(), FireResult.Accepted);
 
         transition.removeActionListener(actionListener);
@@ -58,7 +59,7 @@ public class EventTest {
         Assertions.assertNotNull(statemachine);
         Assertions.assertNotNull(statemachine.getId());
 
-        final StateContext<String, String> result = statemachine.fire("initial", Parameter.empty());
+        final StateContext<String, String> result = statemachine.fire("initial", Params.create());
         Assertions.assertEquals(result.getResult(), FireResult.Accepted);
     }
 

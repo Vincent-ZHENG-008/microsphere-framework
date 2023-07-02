@@ -1,6 +1,6 @@
 package com.microsphere.statemachine.state;
 
-import com.microsphere.statemachine.Parameter;
+import com.microsphere.core.value.Params;
 import com.microsphere.statemachine.StateMachine;
 import com.microsphere.statemachine.enumerate.FireResult;
 import com.microsphere.statemachine.transition.Transition;
@@ -19,7 +19,7 @@ public interface StateContext<S, E> {
 
     StateMachine<S, E> getStateMachine();
 
-    Parameter getParameter();
+    Params getParams();
 
     Exception getException();
 

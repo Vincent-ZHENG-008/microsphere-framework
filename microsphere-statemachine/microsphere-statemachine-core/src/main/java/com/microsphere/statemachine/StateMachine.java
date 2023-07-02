@@ -2,6 +2,7 @@ package com.microsphere.statemachine;
 
 import com.microsphere.core.context.Lifecycle;
 import com.microsphere.common.value.ID;
+import com.microsphere.core.value.Params;
 import com.microsphere.statemachine.state.StateContext;
 import com.microsphere.statemachine.support.DefaultStateMachine;
 import com.microsphere.statemachine.transition.Transition;
@@ -49,13 +50,19 @@ public interface StateMachine<S, E> extends Lifecycle {
 
     Collection<Transition<S, E>> getTransitions();
 
-    StateContext<S, E> fire(E event, Parameter param);
+    StateContext<S, E> fire(E event, Params param);
 
     static <S, E> StateMachine<S, E> of(Collection<Transition<S, E>> transitions) {
         return new DefaultStateMachine<>(transitions);
     }
 
-    record MachineId(UUID uuid) implements ID<UUID> {
+    class MachineId implements ID<UUID> {
+
+        private final UUID uuid;
+
+        public MachineId(UUID uuid) {
+            this.uuid = uuid;
+        }
 
         @Override
         public UUID getId() {

@@ -12,7 +12,7 @@ public interface StateListener<S, E> {
 
     void onEntry(StateContext<S, E> context);
 
-    void onExist(StateContext<S, E> context);
+    void onExit(StateContext<S, E> context);
 
     void onComplete(StateContext<S, E> context);
 

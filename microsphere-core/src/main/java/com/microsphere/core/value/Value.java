@@ -19,9 +19,9 @@ public interface Value {
     boolean isInstanceOf(Class<?> type);
 
     static Value of(Object value) {
-        Assert.notNull(value, "value is required");
+        Assert.notNull(value, () -> "value is required");
 
-        return null;
+        return new DefaultValue(value);
     }
 
     class DefaultValue implements Value {

@@ -1,6 +1,7 @@
 package com.microsphere.statemachine;
 
 import com.microsphere.common.logging.Log;
+import com.microsphere.core.value.Params;
 import com.microsphere.statemachine.enumerate.FireResult;
 import com.microsphere.statemachine.listener.ActionListener;
 import com.microsphere.statemachine.listener.StateListener;
@@ -45,7 +46,7 @@ class StateMachineTest {
         Assertions.assertNotNull(statemachine);
         Assertions.assertNotNull(statemachine.getId());
 
-        final StateContext<String, String> result = statemachine.fire("initial", Parameter.empty());
+        final StateContext<String, String> result = statemachine.fire("initial", Params.create());
         Assertions.assertEquals(result.getResult(), FireResult.Accepted);
     }
 
@@ -61,7 +62,7 @@ class StateMachineTest {
         Assertions.assertNotNull(statemachine);
         Assertions.assertNotNull(statemachine.getId());
 
-        final StateContext<String, String> result = statemachine.fire("end", Parameter.empty());
+        final StateContext<String, String> result = statemachine.fire("end", Params.create());
         Assertions.assertEquals(result.getResult(), FireResult.Rejected);
     }
 
@@ -70,7 +71,7 @@ class StateMachineTest {
         final String key = "ID";
         final String UserId = "USER_ID";
         final String initialEvent = "initial";
-        final Consumer<StateContext<String, String>> action = ctx -> LOG.info("initial created and get id with {0}", ctx.getParameter().load(key, Integer.class), ctx.getParameter().load(UserId, Long.class));
+        final Consumer<StateContext<String, String>> action = ctx -> LOG.info("initial created and get id with {0}", ctx.getParams().get(key, Integer.class), ctx.getParams().get(UserId, Long.class));
         final Transition<String, String> transition = new DefaultTransition<>(
                 new DefalutState<>("", initialEvent), new DefalutState<>("created", null), new ObjectTrigger<>(initialEvent), null, List.of(action)
         );
@@ -79,7 +80,10 @@ class StateMachineTest {
         Assertions.assertNotNull(statemachine);
         Assertions.assertNotNull(statemachine.getId());
 
-        final StateContext<String, String> result = statemachine.fire("initial", Parameter.create().put(key, 1).put(UserId, 2L));
+        final Params params = Params.create();
+        params.bind(key, 1);
+        params.bind(UserId, 2L);
+        final StateContext<String, String> result = statemachine.fire("initial", params);
         Assertions.assertEquals(result.getResult(), FireResult.Accepted);
     }
 
@@ -93,7 +97,7 @@ class StateMachineTest {
         }
 
         @Override
-        public void onExist(StateContext<S, E> context) {
+        public void onExit(StateContext<S, E> context) {
             log.info("state existed");
         }
 

@@ -55,8 +55,8 @@ public class DefalutState<S, E> implements State<S, E> {
     }
 
     @Override
-    public void onExist(StateContext<S, E> context) {
-        this.listeners.forEach(listener -> listener.onExist(context));
+    public void onExit(StateContext<S, E> context) {
+        this.listeners.forEach(listener -> listener.onExit(context));
     }
 
     @Override

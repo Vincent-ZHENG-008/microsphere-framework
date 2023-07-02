@@ -31,12 +31,6 @@
             <version>${revision}</version>
         </dependency>
 
-        <!-- micrometer dependencies -->
-        <dependency>
-            <groupId>io.micrometer</groupId>
-            <artifactId>micrometer-registry-influx</artifactId>
-        </dependency>
-
         <!-- test dependencies -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>

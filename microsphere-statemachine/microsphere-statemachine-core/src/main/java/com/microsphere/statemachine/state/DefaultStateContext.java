@@ -1,7 +1,7 @@
 package com.microsphere.statemachine.state;
 
 import com.microsphere.core.util.ObjectUtils;
-import com.microsphere.statemachine.Parameter;
+import com.microsphere.core.value.Params;
 import com.microsphere.statemachine.StateMachine;
 import com.microsphere.statemachine.enumerate.FireResult;
 import com.microsphere.statemachine.transition.Transition;
@@ -20,17 +20,17 @@ public class DefaultStateContext<S, E> implements StateContext<S, E> {
 
     private final E event;
 
-    private final Parameter parameter;
+    private final Params params;
 
     private Exception error;
 
     private FireResult result;
 
-    public DefaultStateContext(StateMachine<S, E> stateMachine, Transition<S, E> transition, E event, Parameter parameter) {
+    public DefaultStateContext(StateMachine<S, E> stateMachine, Transition<S, E> transition, E event, Params params) {
         this.stateMachine = stateMachine;
         this.transition = transition;
         this.event = event;
-        this.parameter = parameter;
+        this.params = params;
         this.error = null;
     }
 
@@ -50,8 +50,8 @@ public class DefaultStateContext<S, E> implements StateContext<S, E> {
     }
 
     @Override
-    public Parameter getParameter() {
-        return parameter;
+    public Params getParams() {
+        return params;
     }
 
     @Override

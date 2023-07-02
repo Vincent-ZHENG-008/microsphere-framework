@@ -1,6 +1,7 @@
 package com.microsphere.statemachine;
 
 import com.microsphere.common.logging.Log;
+import com.microsphere.core.value.Params;
 import com.microsphere.statemachine.exception.GuardNonPassedException;
 import com.microsphere.statemachine.state.DefalutState;
 import com.microsphere.statemachine.state.State;
@@ -31,7 +32,7 @@ public class GuardStateMachineTest {
 
         try {
             final StateMachine<String, String> sm = StateMachine.of(List.of(transition));
-            sm.fire("init", Parameter.empty());
+            sm.fire("init", Params.create());
         } catch (Exception ex) {
             Assertions.assertTrue(ex instanceof GuardNonPassedException);
 

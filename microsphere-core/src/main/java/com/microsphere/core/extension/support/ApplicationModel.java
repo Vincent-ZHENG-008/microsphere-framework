@@ -6,6 +6,7 @@ import com.microsphere.core.extension.ExtensionLoader;
 import java.util.List;
 import java.util.ServiceLoader;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.stream.Collectors;
 
 /**
  * #: todo - what is this
@@ -20,11 +21,9 @@ public class ApplicationModel implements ExtensionAccessor {
     private static final List<ExtensionAccessor> EXTENSION_ACCESSORS;
 
     static {
-        final List<ExtensionAccessor> extensionAccessors = ServiceLoader.load(ExtensionAccessor.class).stream()
+        EXTENSION_ACCESSORS = ServiceLoader.load(ExtensionAccessor.class).stream()
                 .map(ServiceLoader.Provider::get)
-                .toList();
-
-        EXTENSION_ACCESSORS = new CopyOnWriteArrayList<>(extensionAccessors);
+                .collect(Collectors.toCollection(CopyOnWriteArrayList::new));
     }
 
     @Override

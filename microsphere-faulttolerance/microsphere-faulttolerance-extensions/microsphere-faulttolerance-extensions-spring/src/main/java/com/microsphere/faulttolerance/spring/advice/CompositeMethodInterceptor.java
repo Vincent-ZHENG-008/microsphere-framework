@@ -1,6 +1,5 @@
 package com.microsphere.faulttolerance.spring.advice;
 
-import com.microsphere.common.logging.Log;
 import com.microsphere.core.util.Assert;
 import com.microsphere.faulttolerance.core.ProxyCallable;
 import com.microsphere.faulttolerance.spring.FaultToleranceMatcher;
@@ -37,10 +36,11 @@ public class CompositeMethodInterceptor implements MethodInterceptor {
 
     @Override
     public Object invoke(MethodInvocation mi) throws Throwable {
-        if (!(mi instanceof ProxyMethodInvocation pmi)) {
+        if (!(mi instanceof ProxyMethodInvocation)) {
             throw new IllegalStateException("MethodInvocation is not a Spring ProxyMethodInvocation: " + mi);
         }
 
+        final ProxyMethodInvocation pmi = (ProxyMethodInvocation) mi;
         final Object invoker = pmi.getThis();
         if (invoker == null) {
             throw new IllegalArgumentException("Cannot get real target.");

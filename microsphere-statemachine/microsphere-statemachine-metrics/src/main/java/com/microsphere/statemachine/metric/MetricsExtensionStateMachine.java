@@ -1,7 +1,7 @@
 package com.microsphere.statemachine.metric;
 
 import com.microsphere.core.util.Assert;
-import com.microsphere.statemachine.Parameter;
+import com.microsphere.core.value.Params;
 import com.microsphere.statemachine.StateMachine;
 import com.microsphere.statemachine.enumerate.FireResult;
 import com.microsphere.statemachine.state.StateContext;
@@ -63,7 +63,7 @@ public class MetricsExtensionStateMachine<S, E> implements StateMachine<S, E> {
     }
 
     @Override
-    public StateContext<S, E> fire(E event, Parameter param) {
+    public StateContext<S, E> fire(E event, Params param) {
         final Observation.Context ctx = new Observation.Context();
         final Observation observation = Observation
                 .createNotStarted(getName(), () -> ctx, statistics)

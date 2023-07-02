@@ -1,7 +1,7 @@
 package com.microsphere.statemachine.sample.mertrics;
 
 import com.microsphere.common.logging.Log;
-import com.microsphere.statemachine.Parameter;
+import com.microsphere.core.value.Params;
 import com.microsphere.statemachine.StateMachine;
 import com.microsphere.statemachine.enumerate.FireResult;
 import com.microsphere.statemachine.exception.GuardNonPassedException;
@@ -72,7 +72,7 @@ public class SampleMetricsStateMachineTest {
         StateMachine<String, String> statemachine = StateMachine.of(List.of(transition));
         statemachine = new MetricsExtensionStateMachine<>(statemachine, observationRegistry);
 
-        final StateContext<String, String> result = statemachine.fire("initial", Parameter.empty());
+        final StateContext<String, String> result = statemachine.fire("initial", Params.create());
         Assertions.assertEquals(result.getResult(), FireResult.Accepted);
 
         Thread.sleep(2000);
@@ -98,7 +98,7 @@ public class SampleMetricsStateMachineTest {
         StateMachine<String, String> statemachine = StateMachine.of(List.of(transition));
         statemachine = new MetricsExtensionStateMachine<>(statemachine, observationRegistry);
 
-        final StateContext<String, String> result = statemachine.fire("initial1", Parameter.empty());
+        final StateContext<String, String> result = statemachine.fire("initial1", Params.create());
         Assertions.assertEquals(result.getResult(), FireResult.Rejected);
 
         Thread.sleep(2000);
@@ -125,7 +125,7 @@ public class SampleMetricsStateMachineTest {
         statemachine = new MetricsExtensionStateMachine<>(statemachine, observationRegistry);
 
         try {
-            statemachine.fire("initial", Parameter.empty());
+            statemachine.fire("initial", Params.create());
         } catch (GuardNonPassedException ex) {
             LOG.info("guard cannot pass.");
         }

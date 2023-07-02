@@ -32,6 +32,15 @@ public final class Params {
         return paramValues.get(name);
     }
 
+    public <T> T get(String name, Class<T> type) {
+        final ParamValue paramValue = paramValues.get(name);
+        if (paramValue == null) {
+            return null;
+        }
+
+        return paramValue.get(type);
+    }
+
     public List<String> getParametersName() {
         return List.copyOf(paramValues.keySet());
     }

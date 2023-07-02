@@ -3,7 +3,7 @@ package com.microsphere.statemachine.support;
 
 import com.microsphere.common.value.ID;
 import com.microsphere.core.util.ObjectUtils;
-import com.microsphere.statemachine.Parameter;
+import com.microsphere.core.value.Params;
 import com.microsphere.statemachine.StateMachine;
 import com.microsphere.statemachine.enumerate.FireResult;
 import com.microsphere.statemachine.exception.GuardNonPassedException;
@@ -92,7 +92,7 @@ public class DefaultStateMachine<S, E> implements StateMachine<S, E> {
     }
 
     @Override
-    public StateContext<S, E> fire(E event, Parameter param) {
+    public StateContext<S, E> fire(E event, Params param) {
         for (Transition<S, E> transition : transitions) {
             final DefaultStateContext<S, E> stateContext = new DefaultStateContext<>(this, transition, event, param);
             if (!transition.transit(stateContext)) {
@@ -133,7 +133,7 @@ public class DefaultStateMachine<S, E> implements StateMachine<S, E> {
                 stateContext.resultRegistration(FireResult.Abnormal);
             } finally {
                 // State exist event published
-                source.onExist(stateContext);
+                source.onExit(stateContext);
             }
 
             // Return StateContext
