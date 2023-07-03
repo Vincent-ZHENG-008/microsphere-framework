@@ -10,6 +10,12 @@ import com.microsphere.core.util.Assert;
  */
 public interface Value {
 
+    static Value of(Object value) {
+        Assert.notNull(value, () -> "value must not be null");
+
+        return new DefaultValue(value);
+    }
+
     Object get();
 
     <T> T get(Class<T> type);
@@ -17,12 +23,6 @@ public interface Value {
     <T> T get(TypeSupplier<T> typeSupplier);
 
     boolean isInstanceOf(Class<?> type);
-
-    static Value of(Object value) {
-        Assert.notNull(value, () -> "value is required");
-
-        return new DefaultValue(value);
-    }
 
     class DefaultValue implements Value {
 
@@ -40,7 +40,7 @@ public interface Value {
         @Override
         @SuppressWarnings("unchecked")
         public <T> T get(Class<T> type) {
-            if (type.isInstance(value)) {
+            if (isInstanceOf(type)) {
                 return (T) value;
             }
 
@@ -55,6 +55,7 @@ public interface Value {
 
         @Override
         public boolean isInstanceOf(Class<?> type) {
+            Assert.notNull(type, () -> "Type cannot be null.");
             return type.isInstance(value);
         }
     }

@@ -7,7 +7,7 @@ package com.microsphere.statemachine.enumerate;
  * @since 0.0.1
  */
 public enum FireResult {
-    Accepted,
     Rejected,
+    Accepted,
     Abnormal,
 }

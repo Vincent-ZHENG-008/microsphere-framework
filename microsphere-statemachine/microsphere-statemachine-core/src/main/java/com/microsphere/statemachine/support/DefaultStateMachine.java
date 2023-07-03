@@ -7,11 +7,11 @@ import com.microsphere.core.value.Params;
 import com.microsphere.statemachine.StateMachine;
 import com.microsphere.statemachine.enumerate.FireResult;
 import com.microsphere.statemachine.exception.GuardNonPassedException;
+import com.microsphere.statemachine.exception.MachineClosedException;
 import com.microsphere.statemachine.state.DefaultStateContext;
 import com.microsphere.statemachine.state.State;
 import com.microsphere.statemachine.state.StateContext;
 import com.microsphere.statemachine.transition.Transition;
-
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
@@ -27,14 +27,12 @@ import java.util.function.Function;
 public class DefaultStateMachine<S, E> implements StateMachine<S, E> {
 
     /**
-     * StateMachine ID
-     * Default used uuid generator
+     * StateMachine ID Default used uuid generator
      */
     private final ID<UUID> id;
 
     /**
-     * StateMachine Name
-     * Default use {@linkplain DEFAULT_STATEMACHINE_NAME}
+     * StateMachine Name Default use {@linkplain DEFAULT_STATEMACHINE_NAME}
      */
     private final String name;
 
@@ -47,10 +45,6 @@ public class DefaultStateMachine<S, E> implements StateMachine<S, E> {
      * Statemachine state
      */
     private volatile int running;
-
-    public DefaultStateMachine(Collection<Transition<S, E>> transitions) {
-        this(DEFAULT_STATEMACHINE_NAME, transitions);
-    }
 
     public DefaultStateMachine(String name, Collection<Transition<S, E>> transitions) {
         this.name = ObjectUtils.replaceIfNull(name, () -> DEFAULT_STATEMACHINE_NAME);
@@ -76,13 +70,13 @@ public class DefaultStateMachine<S, E> implements StateMachine<S, E> {
 
     @Override
     public void start() {
-        running = StateMachine.RUNNING;
+        running = RUNNING;
     }
 
     @Override
     public void stop() {
-        if (running == StateMachine.RUNNING) {
-            running = StateMachine.STOPPED;
+        if (running == RUNNING) {
+            running = STOPPED;
         }
     }
 
@@ -93,6 +87,10 @@ public class DefaultStateMachine<S, E> implements StateMachine<S, E> {
 
     @Override
     public StateContext<S, E> fire(E event, Params param) {
+        if (running == STOPPED) {
+            throw MachineClosedException.GLOBAL;
+        }
+
         for (Transition<S, E> transition : transitions) {
             final DefaultStateContext<S, E> stateContext = new DefaultStateContext<>(this, transition, event, param);
             if (!transition.transit(stateContext)) {
@@ -152,8 +150,10 @@ public class DefaultStateMachine<S, E> implements StateMachine<S, E> {
     @Override
     public String toString() {
         return "DefaultStateMachine{" +
-                "id=" + id +
-                ", transitions=" + transitions +
+                "id=" + getId() +
+                "name=" + getName() +
+                "isRunning=" + isRunning() +
+                ", transitions=" + getTransitions() +
                 '}';
     }
 

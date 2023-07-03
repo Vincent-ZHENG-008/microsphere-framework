@@ -1,9 +1,8 @@
 package com.microsphere.core.value;
 
+import java.util.List;
 import org.eclipse.collections.api.factory.Maps;
 import org.eclipse.collections.api.map.MutableMap;
-
-import java.util.List;
 
 /**
  * #: todo - what is this
@@ -18,7 +17,11 @@ public final class Params {
     private Params() {
     }
 
-    public boolean isNotEmpty() {
+    public static Params create() {
+        return new Params();
+    }
+
+    public boolean isNonEmpty() {
         return !paramValues.isEmpty();
     }
 
@@ -43,10 +46,6 @@ public final class Params {
 
     public List<String> getParametersName() {
         return List.copyOf(paramValues.keySet());
-    }
-
-    public static Params create() {
-        return new Params();
     }
 
 }

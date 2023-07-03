@@ -1,51 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-
-    <parent>
-        <groupId>com.wunhwan</groupId>
-        <artifactId>microsphere-statemachine</artifactId>
-        <version>${revision}</version>
-        <relativePath>../pom.xml</relativePath>
-    </parent>
-
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <artifactId>microsphere-statemachine-dependencies</artifactId>
-    <version>${revision}</version>
-    <packaging>pom</packaging>
-
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <micrometer.version>1.11.0</micrometer.version>
-    </properties>
 
     <dependencyManagement>
         <dependencies>
+            <!-- SpringBoot Dependencies -->
+            <dependency>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <groupId>org.springframework.boot</groupId>
+                <scope>import</scope>
+                <type>pom</type>
+                <version>${spring-boot.version}</version>
+            </dependency>
             <!-- Global Dependencies Management -->
             <dependency>
-                <groupId>com.wunhwan</groupId>
                 <artifactId>microsphere-dependencies</artifactId>
-                <version>${revision}</version>
-                <type>pom</type>
+                <groupId>com.wunhwan</groupId>
                 <scope>import</scope>
+                <type>pom</type>
+                <version>${revision}</version>
             </dependency>
 
             <!-- Microsphere Dependencies -->
             <dependency>
-                <groupId>com.wunhwan</groupId>
                 <artifactId>microsphere-commons</artifactId>
+                <groupId>com.wunhwan</groupId>
                 <version>${revision}</version>
             </dependency>
 
             <!-- Metric Dependencies -->
             <dependency>
-                <groupId>io.micrometer</groupId>
                 <artifactId>micrometer-bom</artifactId>
-                <version>${micrometer.version}</version>
-                <type>pom</type>
+                <groupId>io.micrometer</groupId>
                 <scope>import</scope>
+                <type>pom</type>
+                <version>${micrometer.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <modelVersion>4.0.0</modelVersion>
+    <packaging>pom</packaging>
+    <parent>
+        <artifactId>microsphere-statemachine</artifactId>
+        <groupId>com.wunhwan</groupId>
+        <relativePath>../pom.xml</relativePath>
+        <version>${revision}</version>
+    </parent>
+
+    <properties>
+        <micrometer.version>1.11.0</micrometer.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- SpringBoot Dependencies -->
+        <spring-boot.version>3.1.0</spring-boot.version>
+    </properties>
+
+    <version>${revision}</version>
 
 </project>
